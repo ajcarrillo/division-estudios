@@ -17,10 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Auth::routes();
+Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/app/{any?}', [ AppController::class, 'index' ])
     ->where('any', '.*')
-    ->middleware([ 'auth' ]);
+    ->middleware([]);
