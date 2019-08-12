@@ -71,6 +71,7 @@
                         <v-list-item
                             v-else
                             :key="item.text"
+                            :to="item.link"
                             @click=""
                         >
                             <v-list-item-action>
