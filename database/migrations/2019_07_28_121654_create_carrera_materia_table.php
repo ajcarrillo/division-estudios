@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateCarreraMateriaTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('carrera_materia', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedInteger('carrera_id');
+            $table->foreign('carrera_id')->references('id')->on('carreras');
+            $table->unsignedBigInteger('materia_id');
+            $table->foreign('materia_id')->references('id')->on('materias');
+            $table->string('semestre', 2)->nullable();
+            $table->tinyInteger('creditos')->default(0);
+
+            $table->unique([ 'carrera_id', 'materia_id', 'semestre' ]);
+
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('carrera_materia');
+    }
+}
