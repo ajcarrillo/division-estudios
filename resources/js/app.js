@@ -6,6 +6,9 @@ import veeValidateEs from './utilities/vee-validate-es';
 import router from './router'
 import vuetify from "./plugins/vuetify";
 import VeeValidate from 'vee-validate'
+import LaravelPermissions from 'laravel-permissions';
+
+Vue.use(LaravelPermissions);
 
 Vue.use(VeeValidate, {
     locale: 'es',
