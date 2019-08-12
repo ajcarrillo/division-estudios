@@ -173,6 +173,7 @@ return [
         DivisionEstudios\Providers\AuthServiceProvider::class,
         // DivisionEstudios\Providers\BroadcastServiceProvider::class,
         DivisionEstudios\Providers\EventServiceProvider::class,
+        DivisionEstudios\Providers\TelescopeServiceProvider::class,
         DivisionEstudios\Providers\RouteServiceProvider::class,
 
     ],
