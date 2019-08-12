@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('extra-meta')
+    @auth
+        <meta name="api-token" content="{{ Auth::user()->api_token }}">
+    @endauth
+@endsection
+
 @section('content')
     @verbatim
         <v-app id="inspire">
@@ -142,4 +148,12 @@
             </v-btn>
         </v-app>
     @endverbatim
+@endsection
+
+@section('beforeScripts')
+    <script type="text/javascript">
+        window.user = {!! json_encode($user) !!};
+        window.roles = {!! json_encode($roles) !!};
+        window.api_token = {!! json_encode($apiToken) !!};
+    </script>
 @endsection

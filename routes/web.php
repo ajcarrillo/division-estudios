@@ -23,4 +23,4 @@ Auth::routes();
 
 Route::get('/app/{any?}', [ AppController::class, 'index' ])
     ->where('any', '.*')
-    ->middleware([]);
+    ->middleware([ 'auth' ]);
