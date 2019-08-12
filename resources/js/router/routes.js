@@ -1,6 +1,7 @@
 import App from '../views/App'
 import NotFound from "../components/NotFoundComponent"
 import TitulacionesHome from '../views/titulaciones/Home'
+import TitulacionesIndex from "../views/titulaciones/Index";
 import ConvalidacionesHome from '../views/convalidaciones/Home'
 
 export default {
@@ -17,7 +18,13 @@ export default {
                 {
                     path: 'titulaciones',
                     component: TitulacionesHome,
-                    name: 'titulaciones'
+                    children: [
+                        {
+                            path: '',
+                            component: TitulacionesIndex,
+                            name: 'titulaciones-index'
+                        }
+                    ]
                 },
                 {
                     path: 'convalidaciones',

@@ -1,5 +1,5 @@
 <template>
-    <h1>Titulaciones</h1>
+    <router-view></router-view>
 </template>
 
 <script>
