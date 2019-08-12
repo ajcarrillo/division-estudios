@@ -8,7 +8,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(\Titulaciones\Models\Modulo::class, function (Faker $faker) {
+$factory->define(\DivisionEstudios\Models\Modulo::class, function (Faker $faker) {
     return [
         'descripcion' => $faker->word,
     ];

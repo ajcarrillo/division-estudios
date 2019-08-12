@@ -11,7 +11,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\Titulaciones\User::class, 1)->create(
+        factory(\DivisionEstudios\User::class, 1)->create(
             [
                 'name'  => 'LIC. RAQUEL IVET SAAVEDRA VARGAS',
                 'email' => 'profesionales@itchetumal.edu.mx',
@@ -38,27 +38,27 @@ class UsersTableSeeder extends Seeder
         ];
 
         foreach ($titulacion as $user) {
-            factory(\Titulaciones\User::class, 1)->create([
+            factory(\DivisionEstudios\User::class, 1)->create([
                 'name'  => $user['name'],
                 'email' => $user['email'],
             ])->each(function ($u) {
-                $u->roles()->attach([ 2 ]);
+
             });
         }
 
         foreach ($jefesDeptos as $jefesDepto) {
-            factory(\Titulaciones\User::class, 1)->create([
+            factory(\DivisionEstudios\User::class, 1)->create([
                 'name' => $jefesDepto['name'],
             ])->each(function ($u) {
-                $u->roles()->attach([ 1 ]);
+
             });
         }
 
         foreach ($escolares as $user) {
-            factory(\Titulaciones\User::class, 1)->create([
+            factory(\DivisionEstudios\User::class, 1)->create([
                 'name' => $user['name'],
             ])->each(function ($u) {
-                $u->roles()->attach([ 4 ]);
+
             });
         }
     }

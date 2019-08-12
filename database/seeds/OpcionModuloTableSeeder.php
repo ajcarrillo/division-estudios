@@ -36,17 +36,17 @@ class OpcionModuloTableSeeder extends Seeder
         ];
 
         foreach ($opciones as $opcion) {
-            $o = new \Titulaciones\Models\Opcion($opcion);
+            $o = new \DivisionEstudios\Models\Opcion($opcion);
             $o->save();
         }
 
         foreach ($modulos as $modulo) {
-            $m = new \Titulaciones\Models\Modulo($modulo);
+            $m = new \DivisionEstudios\Models\Modulo($modulo);
             $m->save();
         }
 
-        $opcion  = \Titulaciones\Models\Opcion::where('descripcion', 'TITULACIÓN INTEGRAL')->first();
-        $modulos = \Titulaciones\Models\Modulo::whereIn('descripcion', [
+        $opcion  = \DivisionEstudios\Models\Opcion::where('descripcion', 'TITULACIÓN INTEGRAL')->first();
+        $modulos = \DivisionEstudios\Models\Modulo::whereIn('descripcion', [
             'INFORME TÉCNICO DE RESIDENCIA PROFESIONAL',
             'PROYECTO DE INNOVACIÓN TECNOLÓGICA',
             'PROYECTO DE INVESTIGACIÓN',

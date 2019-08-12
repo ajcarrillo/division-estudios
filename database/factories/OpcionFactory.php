@@ -8,7 +8,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(\Titulaciones\Models\Opcion::class, function (Faker $faker) {
+$factory->define(\DivisionEstudios\Models\Opcion::class, function (Faker $faker) {
     return [
         'clave'       => $faker->numerify('###'),
         'descripcion' => $faker->word,

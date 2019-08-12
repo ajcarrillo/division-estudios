@@ -20,9 +20,9 @@ class JefeDepartamentoTableSeeder extends Seeder
         ];
 
         foreach ($jefes as $jefe) {
-            $j = new \Titulaciones\Models\JefeDepartamento([
+            $j = new \DivisionEstudios\Models\JefeDepartamento([
                 'id'             => $jefe[0],
-                'responsable_id' => \Titulaciones\User::where('name', $jefe[2])->first()->id,
+                'responsable_id' => \DivisionEstudios\User::where('name', $jefe[2])->first()->id,
                 'jefatura'       => $jefe[1],
             ]);
             $j->save();

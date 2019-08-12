@@ -194,7 +194,7 @@ class MaestroTableSeeder extends Seeder
         ];
 
         foreach ($maestros as $maestro) {
-            $m = new \Titulaciones\Models\Maestro([
+            $m = new \DivisionEstudios\Models\Maestro([
                 'nombre_completo'    => $maestro[1],
                 'especialidad'       => $maestro[0],
                 'cedula_profesional' => $maestro[2],

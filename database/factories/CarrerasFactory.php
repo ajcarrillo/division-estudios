@@ -8,10 +8,10 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(\Titulaciones\Models\Carrera::class, function (Faker $faker) {
+$factory->define(\DivisionEstudios\Models\Carrera::class, function (Faker $faker) {
     return [
         'grado'                => $faker->numerify('###'),
         'descripcion'          => $faker->word,
-        'jefe_departamento_id' => factory(\Titulaciones\Models\JefeDepartamento::class)->create(),
+        'jefe_departamento_id' => factory(\DivisionEstudios\Models\JefeDepartamento::class)->create(),
     ];
 });

@@ -8,7 +8,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(\Titulaciones\Models\JefeDepartamento::class, function (Faker $faker) {
+$factory->define(\DivisionEstudios\Models\JefeDepartamento::class, function (Faker $faker) {
     return [
         'clave'           => $faker->numerify('###'),
         'nombre_completo' => $faker->name(),

@@ -87,17 +87,17 @@ class CarreraTableSeeder extends Seeder
         ];
 
         foreach ($crs as $carrera) {
-            $c = new \Titulaciones\Models\Carrera($carrera);
+            $c = new \DivisionEstudios\Models\Carrera($carrera);
             $c->save();
         }
 
         foreach ($modulos as $modulo) {
-            $m = new \Titulaciones\Models\Modulo($modulo);
+            $m = new \DivisionEstudios\Models\Modulo($modulo);
             $m->save();
         }
 
-        $admon   = \Titulaciones\Models\Carrera::where('descripcion', 'LICENCIATURA EN ADMINISTRACIÓN')->first();
-        $modulos = \Titulaciones\Models\Modulo::whereIn('descripcion', [
+        $admon   = \DivisionEstudios\Models\Carrera::where('descripcion', 'LICENCIATURA EN ADMINISTRACIÓN')->first();
+        $modulos = \DivisionEstudios\Models\Modulo::whereIn('descripcion', [
             'I ADMINISTRACION',
             'II PROYECTOS',
             'III RECUROS HUMANOS',
@@ -108,8 +108,8 @@ class CarreraTableSeeder extends Seeder
         ])->pluck('id');
         $admon->modulos()->attach($modulos);
 
-        $biolo   = \Titulaciones\Models\Carrera::where('descripcion', 'LICENCIATURA EN BIOLOGÍA')->first();
-        $modulos = \Titulaciones\Models\Modulo::whereIn('descripcion', [
+        $biolo   = \DivisionEstudios\Models\Carrera::where('descripcion', 'LICENCIATURA EN BIOLOGÍA')->first();
+        $modulos = \DivisionEstudios\Models\Modulo::whereIn('descripcion', [
             'I ACUACULTURA',
             'II ECOL. MARINA',
             'III TERRESTRE',
@@ -117,8 +117,8 @@ class CarreraTableSeeder extends Seeder
         ])->pluck('id');
         $biolo->modulos()->attach($modulos);
 
-        $conta   = \Titulaciones\Models\Carrera::where('descripcion', 'LICENCIATURA EN CONTADURÍA')->first();
-        $modulos = \Titulaciones\Models\Modulo::whereIn('descripcion', [
+        $conta   = \DivisionEstudios\Models\Carrera::where('descripcion', 'LICENCIATURA EN CONTADURÍA')->first();
+        $modulos = \DivisionEstudios\Models\Modulo::whereIn('descripcion', [
             'I IMPUESTOS',
             'II FINANZAS',
             'III AUDITORIA',
@@ -130,8 +130,8 @@ class CarreraTableSeeder extends Seeder
         ])->pluck('id');
         $conta->modulos()->attach($modulos);
 
-        $info    = \Titulaciones\Models\Carrera::where('descripcion', 'LICENCIATURA EN INFORMÁTICA')->first();
-        $modulos = \Titulaciones\Models\Modulo::whereIn('descripcion', [
+        $info    = \DivisionEstudios\Models\Carrera::where('descripcion', 'LICENCIATURA EN INFORMÁTICA')->first();
+        $modulos = \DivisionEstudios\Models\Modulo::whereIn('descripcion', [
             'I REDES',
             'II SISTEMAS DISTRIBUIDOS',
             'III INGENIERIA DE SOFTWARE',
@@ -139,16 +139,16 @@ class CarreraTableSeeder extends Seeder
         ])->pluck('id');
         $info->modulos()->attach($modulos);
 
-        $civil   = \Titulaciones\Models\Carrera::where('descripcion', 'INGENIERÍA CIVIL')->first();
-        $modulos = \Titulaciones\Models\Modulo::whereIn('descripcion', [
+        $civil   = \DivisionEstudios\Models\Carrera::where('descripcion', 'INGENIERÍA CIVIL')->first();
+        $modulos = \DivisionEstudios\Models\Modulo::whereIn('descripcion', [
             'I ESTRCUTURAS',
             'II COSTOS',
             'III EGEL',
         ])->pluck('id');
         $civil->modulos()->attach($modulos);
 
-        $arq     = \Titulaciones\Models\Carrera::where('descripcion', 'ARQUITECTURA')->first();
-        $modulos = \Titulaciones\Models\Modulo::whereIn('descripcion', [
+        $arq     = \DivisionEstudios\Models\Carrera::where('descripcion', 'ARQUITECTURA')->first();
+        $modulos = \DivisionEstudios\Models\Modulo::whereIn('descripcion', [
             'I DISEÑO',
             'II HISTORIA',
             'III EGEL',

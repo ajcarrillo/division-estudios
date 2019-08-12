@@ -39,7 +39,7 @@ class AlumnoTableSeeder extends Seeder
         ];
 
         foreach ($alumnos as $alumno) {
-            $a = new \Titulaciones\Models\Alumno($alumno);
+            $a = new \DivisionEstudios\Models\Alumno($alumno);
             $a->save();
         }
     }

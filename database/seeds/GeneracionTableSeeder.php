@@ -18,12 +18,12 @@ class GeneracionTableSeeder extends Seeder
         ];
 
         foreach ($generaciones as $generacion) {
-            $g = new \Titulaciones\Models\Generacion($generacion);
+            $g = new \DivisionEstudios\Models\Generacion($generacion);
             $g->save();
         }
 
-        $generacion = \Titulaciones\Models\Generacion::find(1);
-        $opciones   = \Titulaciones\Models\Opcion::whereIn('clave', [
+        $generacion = \DivisionEstudios\Models\Generacion::find(1);
+        $opciones   = \DivisionEstudios\Models\Opcion::whereIn('clave', [
             'I',
             'II',
             'III',
@@ -37,8 +37,8 @@ class GeneracionTableSeeder extends Seeder
         ])->pluck('id');
         $generacion->opciones()->attach($opciones);
 
-        $generacion = \Titulaciones\Models\Generacion::find(2);
-        $opciones   = \Titulaciones\Models\Opcion::whereIn('clave', [
+        $generacion = \DivisionEstudios\Models\Generacion::find(2);
+        $opciones   = \DivisionEstudios\Models\Opcion::whereIn('clave', [
             'I',
             'III',
             'VI',
@@ -48,8 +48,8 @@ class GeneracionTableSeeder extends Seeder
         ])->pluck('id');
         $generacion->opciones()->attach($opciones);
 
-        $generacion = \Titulaciones\Models\Generacion::find(3);
-        $opciones   = \Titulaciones\Models\Opcion::where('id', 11)->pluck('id');
+        $generacion = \DivisionEstudios\Models\Generacion::find(3);
+        $opciones   = \DivisionEstudios\Models\Opcion::where('id', 11)->pluck('id');
         $generacion->opciones()->attach($opciones);
     }
 }
