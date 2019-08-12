@@ -15,28 +15,6 @@
 /*!40101 SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE = 'NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES = @@SQL_NOTES, SQL_NOTES = 0 */;
 
---
--- Table structure for table `alumnos`
---
-
-DROP TABLE IF EXISTS `alumnos`;
-/*!40101 SET @saved_cs_client = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `alumnos` (
-    `id`              INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-    `numero_control`  VARCHAR(10)      NOT NULL,
-    `nombre_completo` VARCHAR(420)     NOT NULL,
-    `sexo`            ENUM ('M','F')   NOT NULL,
-    `carrera_id`      INT(10) UNSIGNED NOT NULL,
-    `created_at`      TIMESTAMP        NULL DEFAULT NULL,
-    `updated_at`      TIMESTAMP        NULL DEFAULT NULL,
-    PRIMARY KEY (`id`),
-    KEY `alumnos_carrera_id_foreign` (`carrera_id`),
-    CONSTRAINT `alumnos_carrera_id_foreign` FOREIGN KEY (`carrera_id`) REFERENCES `carreras` (`id`)
-)
-    ENGINE = InnoDB
-    AUTO_INCREMENT = 18332
-    DEFAULT CHARSET = utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
