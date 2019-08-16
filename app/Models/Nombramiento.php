@@ -12,6 +12,11 @@ class Nombramiento extends Model
         'fecha',
     ];
 
+    public function archivos()
+    {
+        return $this->morphMany(Archivo::class, 'fileable');
+    }
+
     public function memo()
     {
         return $this->belongsTo(NumeroOficio::class, 'numero_memo_id');
