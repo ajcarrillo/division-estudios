@@ -28,7 +28,7 @@ class CreateNombramientosTable extends Migration
             $table->date('fecha');
             $table->unsignedTinyInteger('horario_id');
             $table->foreign('horario_id')->references('id')->on('horarios');
-            $table->enum('estatus', [ 'P', 'E', 'C' ]);
+            $table->enum('estatus', [ 'P', 'E', 'C' ])->comment('P = pendiente, E = enviado, C = concluido');
             $table->timestamps();
         });
     }
