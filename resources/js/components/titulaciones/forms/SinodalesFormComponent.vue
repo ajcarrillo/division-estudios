@@ -112,6 +112,19 @@
             axios.get(route('api.v1.catalogos.maestros.index'))
                 .then(res => {
                     this.maestros = res.data.items;
+
+                    if (this.draft.length) {
+                        let presidente = this.draft.find(sinodal => sinodal.tipo === 'PRESIDENTE');
+                        let secretario = this.draft.find(sinodal => sinodal.tipo === 'SECRETARIO');
+                        let vocal = this.draft.find(sinodal => sinodal.tipo === 'VOCAL');
+                        let vocalSuplente = this.draft.find(sinodal => sinodal.tipo === 'VOCAL SUPLENTE');
+
+                        this.presidente = {id: presidente.maestro.id, nombre_completo: presidente.maestro.nombre_completo};
+                        this.secretario = {id: secretario.maestro.id, nombre_completo: secretario.maestro.nombre_completo};
+                        this.vocal = {id: vocal.maestro.id, nombre_completo: vocal.maestro.nombre_completo};
+                        this.vocalSuplente = {id: vocalSuplente.maestro.id, nombre_completo: vocalSuplente.maestro.nombre_completo};
+                    }
+
                     this.loadingMaestros = false;
                 })
                 .catch(err => {

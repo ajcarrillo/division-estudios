@@ -11,7 +11,6 @@
                 :sinodales="draft.sinodales"
                 :status="status"
                 :archivos="draft.archivos"
-                @syncDraft="syncDraft"
             ></menu-nombramiento-card>
         </v-card-actions>
         <v-divider light></v-divider>
@@ -29,6 +28,23 @@
                     <span class="font-weight-medium black--text">{{ draft.alumno.carrera.descripcion }}</span>
                 </v-col>
             </v-row>
+        </v-card-text>
+        <v-card-text class="py-0" v-if="sinodales.length">
+            <v-list
+                :subheader="true"
+            >
+                <v-subheader class="px-0">SINODALES</v-subheader>
+                <v-list-item
+                    :key="i"
+                    class="px-0"
+                    v-for="(item, i) in sinodales"
+                >
+                    <v-list-item-content class="py-0">
+                        <v-list-item-title>{{ item.maestro.nombre_completo }}</v-list-item-title>
+                        <v-list-item-subtitle>{{ item.tipo }}</v-list-item-subtitle>
+                    </v-list-item-content>
+                </v-list-item>
+            </v-list>
         </v-card-text>
     </v-card>
 </template>
@@ -84,6 +100,9 @@
                     case 'C':
                         return 'Concluido';
                 }
+            },
+            sinodales() {
+                return this.draft.sinodales;
             }
         }
     }

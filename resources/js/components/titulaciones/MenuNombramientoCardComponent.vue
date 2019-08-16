@@ -23,10 +23,7 @@
                 <v-list-item-title>Generar nombramiento</v-list-item-title>
             </v-list-item>
             <template v-if="hasSinodales">
-                <v-list-item @click="">
-                    <v-list-item-title>Mostrar sinodales</v-list-item-title>
-                </v-list-item>
-                <v-list-item @click="" v-if="status === 'E'" v-role:any="'jefe-departamento|division-estudios'">
+                <v-list-item @click="modificarSinodales" v-if="status === 'E'" v-role:any="'jefe-departamento|division-estudios'">
                     <v-list-item-title>Modificar sinodales</v-list-item-title>
                 </v-list-item>
             </template>
@@ -70,7 +67,7 @@
             generarActa() {
                 this.$store.dispatch('titulaciones/storeActa', this.nombramientoId)
                     .then(res => {
-                        this.$emit('syncDraft')
+
                     })
                     .catch(err => {
 
@@ -79,6 +76,10 @@
             agregarSinodales() {
                 let nombramientoId = this.nombramientoId;
                 this.$router.push({name: 'sinodales-create', params: {nombramientoId}});
+            },
+            modificarSinodales() {
+                let nombramientoId = this.nombramientoId;
+                this.$router.push({name: 'sinodales-edit', params: {nombramientoId}});
             }
         },
         watch: {},

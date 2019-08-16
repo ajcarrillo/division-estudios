@@ -9,7 +9,7 @@
                         </div>
                     </v-card-title>
                     <v-card-text>
-                        <sinodales-form :saving="saving" @submit="submit"></sinodales-form>
+                        <sinodales-form :saving="saving" :sinodales="sinodales" @submit="submit"></sinodales-form>
                     </v-card-text>
                     <v-card-actions></v-card-actions>
                 </v-card>
@@ -22,15 +22,14 @@
     import SinodalesForm from "../../components/titulaciones/forms/SinodalesFormComponent";
 
     export default {
-        name: "CreateSinodales",
+        name: "EditSinodales",
         components: {
             SinodalesForm
         },
-        props: {},
+        props: ['nombramientoId'],
         data() {
             return {
                 saving: false,
-                sinodales: []
             }
         },
         mounted() {
@@ -62,7 +61,15 @@
             }
         },
         watch: {},
-        computed: {}
+        computed: {
+            sinodales() {
+                let byId = this.$store.getters['titulaciones/getTitulacionById'];
+
+                let titulacion = byId(this.nombramientoId);
+
+                return titulacion.sinodales;
+            }
+        }
     }
 </script>
 

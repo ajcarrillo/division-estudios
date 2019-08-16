@@ -50,7 +50,7 @@ class SinodalesController extends Controller
                 }
             });
 
-            return ok([ 'sinodales' => $nombramiento->sinodales ]);
+            return ok([ 'sinodales' => $nombramiento->sinodales()->with('maestro')->get() ]);
         } catch (\Exception $e) {
             return unprocessable_entity([], $e->getMessage());
         } catch (\Throwable $e) {
