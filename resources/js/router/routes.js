@@ -3,6 +3,7 @@ import NotFound from "../components/NotFoundComponent"
 import TitulacionesHome from '../views/titulaciones/Home'
 import TitulacionesIndex from "../views/titulaciones/Index";
 import ConvalidacionesHome from '../views/convalidaciones/Home'
+import CreateSinodales from "../views/titulaciones/CreateSinodales";
 
 export default {
     mode: 'history',
@@ -23,6 +24,11 @@ export default {
                             path: '',
                             component: TitulacionesIndex,
                             name: 'titulaciones-index'
+                        },
+                        {
+                            path: ':nombramientoId/asignar/sinodales',
+                            component: CreateSinodales,
+                            name: 'sinodales-create'
                         }
                     ]
                 },

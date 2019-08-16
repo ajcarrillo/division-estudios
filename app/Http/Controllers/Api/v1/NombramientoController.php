@@ -2,7 +2,6 @@
 
 namespace DivisionEstudios\Http\Controllers\Api\v1;
 
-use DB;
 use DivisionEstudios\Http\Controllers\Controller;
 use DivisionEstudios\Models\Carrera;
 use DivisionEstudios\Models\Horario;
@@ -31,7 +30,7 @@ class NombramientoController extends Controller
 
     public function index(Request $request)
     {
-        $query = Nombramiento::with('sinodales', 'sinodales.maestro', 'memo', 'alumno', 'alumno.carrera', 'opcion', 'modulo', 'horario');
+        $query = Nombramiento::with('sinodales', 'sinodales.maestro', 'memo', 'alumno', 'alumno.carrera', 'opcion', 'modulo', 'horario', 'archivos');
 
         if (get_current_api_user()->hasRole('division-estudios')) {
 
@@ -58,50 +57,5 @@ class NombramientoController extends Controller
         $nombramiento->save();
 
         return ok(compact('nombramiento'));
-    }
-
-    public function storeSinodales(Request $request, Nombramiento $nombramiento)
-    {
-        try {
-            DB::transaction(function () use ($request, $nombramiento) {
-                $presi         = $request->post('presidente');
-                $secretario    = $request->post('secretario');
-                $vocal         = $request->post('vocal');
-                $vocalSuplente = $request->post('vocalSuplente');
-
-                if ( ! is_null($presi)) {
-                    $nombramiento->sinodales()->updateOrCreate(
-                        [ 'tipo' => 'PRESIDENTE' ], [ 'maestro_id' => $presi['value'] ]
-                    );
-                }
-
-                if ( ! is_null($secretario)) {
-                    $nombramiento->sinodales()->updateOrCreate(
-                        [ 'tipo' => 'SECRETARIO' ], [ 'maestro_id' => $secretario['value'] ]
-                    );
-                }
-
-                if ( ! is_null($vocal)) {
-                    $nombramiento->sinodales()->updateOrCreate(
-                        [ 'tipo' => 'VOCAL' ], [ 'maestro_id' => $vocal['value'] ]
-                    );
-                }
-
-                if ( ! is_null($vocalSuplente)) {
-                    $nombramiento->sinodales()->updateOrCreate(
-                        [ 'tipo' => 'VOCAL SUPLENTE' ], [ 'maestro_id' => $vocalSuplente['value'] ]
-                    );
-                }
-            });
-            $this->result['is_valid'] = true;
-        } catch (\Exception $e) {
-            $this->result['msg']    = $e->getMessage();
-            $this->result['errors'] = $e->getTraceAsString();
-        } catch (\Throwable $e) {
-            $this->result['msg']    = $e->getMessage();
-            $this->result['errors'] = $e->getTraceAsString();
-        }
-
-        return response()->json($this->result);
     }
 }

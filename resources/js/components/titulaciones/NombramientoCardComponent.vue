@@ -10,6 +10,8 @@
                 :nombramiento-id="draft.id"
                 :sinodales="draft.sinodales"
                 :status="status"
+                :archivos="draft.archivos"
+                @syncDraft="syncDraft"
             ></menu-nombramiento-card>
         </v-card-actions>
         <v-divider light></v-divider>
@@ -50,7 +52,11 @@
                 draft: clone(this.nombramiento),
             }
         },
-        methods: {},
+        methods: {
+            syncDraft() {
+                this.draft.archivos = this.nombramiento.archivos;
+            }
+        },
         watch: {},
         computed: {
             time() {

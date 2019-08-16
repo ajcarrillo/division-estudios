@@ -13,7 +13,7 @@
             <v-list-item @click="" v-if="status === 'C'" v-role:any="'titulacion|division-estudios'">
                 <v-list-item-title>Generar juramento</v-list-item-title>
             </v-list-item>
-            <v-list-item @click="" v-if="status === 'C'" v-role:any="'titulacion|division-estudios'">
+            <v-list-item @click="generarActa" v-if="status === 'C'" v-role:any="'titulacion|division-estudios'">
                 <v-list-item-title>Generar acta</v-list-item-title>
             </v-list-item>
             <v-list-item @click="" v-role:any="'titulacion|division-estudios'">
@@ -31,7 +31,7 @@
                 </v-list-item>
             </template>
             <template v-else>
-                <v-list-item @click="" v-if="status === 'E'" v-role:any="'jefe-departamento|division-estudios'">
+                <v-list-item @click="agregarSinodales" v-if="status === 'E'" v-role:any="'jefe-departamento|division-estudios'">
                     <v-list-item-title>Agregar sinodales</v-list-item-title>
                 </v-list-item>
             </template>
@@ -57,16 +57,37 @@
                 required: true,
                 default: []
             },
+            archivos: {
+                type: Array,
+                required: true,
+                default: []
+            }
         },
         data() {
             return {}
         },
-        methods: {},
+        methods: {
+            generarActa() {
+                this.$store.dispatch('titulaciones/storeActa', this.nombramientoId)
+                    .then(res => {
+                        this.$emit('syncDraft')
+                    })
+                    .catch(err => {
+
+                    })
+            },
+            agregarSinodales() {
+                let nombramientoId = this.nombramientoId;
+                this.$router.push({name: 'sinodales-create', params: {nombramientoId}});
+            }
+        },
         watch: {},
         computed: {
             hasSinodales() {
                 return this.sinodales.length
             },
+            hasActa() {
+            }
         }
     }
 </script>
