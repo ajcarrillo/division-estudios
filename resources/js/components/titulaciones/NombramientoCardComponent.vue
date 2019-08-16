@@ -11,6 +11,7 @@
                 :sinodales="draft.sinodales"
                 :status="status"
                 :archivos="draft.archivos"
+                @syncDraft="syncDraft"
             ></menu-nombramiento-card>
         </v-card-actions>
         <v-divider light></v-divider>
@@ -46,15 +47,19 @@
                 </v-list-item>
             </v-list>
         </v-card-text>
+        <v-divider class="mx-4" light></v-divider>
+        <slide-files :archivos="archivos" v-if="archivos.length"></slide-files>
     </v-card>
 </template>
 
 <script>
     import MenuNombramientoCard from "./MenuNombramientoCardComponent";
+    import SlideFiles from "./SlideFilesComponent";
 
     export default {
         name: "NombramientoCardComponent",
         components: {
+            SlideFiles,
             MenuNombramientoCard
         },
         props: {
@@ -70,7 +75,7 @@
         },
         methods: {
             syncDraft() {
-                this.draft.archivos = this.nombramiento.archivos;
+                this.draft = this.nombramiento;
             }
         },
         watch: {},
@@ -103,6 +108,9 @@
             },
             sinodales() {
                 return this.draft.sinodales;
+            },
+            archivos() {
+                return this.draft.archivos;
             }
         }
     }

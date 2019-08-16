@@ -2,6 +2,7 @@
 
 use DivisionEstudios\Http\Controllers\Api\v1\ActaExamenController;
 use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\MaestroController;
+use DivisionEstudios\Http\Controllers\Api\v1\MemoSinodalesController;
 use DivisionEstudios\Http\Controllers\Api\v1\NombramientoController;
 use DivisionEstudios\Http\Controllers\Api\v1\SinodalesController;
 use Illuminate\Http\Request;
@@ -47,6 +48,12 @@ Route::prefix('/v1')
                     ->name('sinodales.')
                     ->group(function () {
                         Route::post('/', [ SinodalesController::class, 'store' ])->name('store');
+                    });
+
+                Route::prefix('/{nombramiento}/memo-sinodales')
+                    ->name('memo.sinodales.')
+                    ->group(function () {
+                        Route::post('/', [ MemoSinodalesController::class, 'store' ])->name('store');
                     });
             });
     });

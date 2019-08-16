@@ -10,9 +10,7 @@ export default {
     SET_ARCHIVOS(state, payload) {
         let {id, archivo} = payload;
 
-        let index = state.titulaciones.findIndex(function (el) {
-            return el.id === id
-        });
+        let index = state.titulaciones.findIndex(titulacion => titulacion.id === id);
 
         state.titulaciones[index].archivos.push(archivo);
     },

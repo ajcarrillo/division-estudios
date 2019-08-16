@@ -48,5 +48,24 @@ export default {
                     reject(err)
                 })
         })
+    },
+    storeMemoSinodales(context, payload) {
+        return new Promise((resolve, reject) => {
+            let {nombramiento} = payload;
+
+            axios.post(route('api.v1.nombramientos.memo.sinodales.store', nombramiento))
+                .then(res => {
+
+                    let payload = {id: nombramiento, archivo: res.data.archivo};
+
+                    context.commit('SET_ARCHIVOS', payload);
+
+                    resolve(res);
+                })
+                .catch(err => {
+                    console.log(err);
+                    reject(err.response.data);
+                })
+        });
     }
 }

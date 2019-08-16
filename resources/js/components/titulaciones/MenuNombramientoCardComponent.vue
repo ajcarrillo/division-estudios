@@ -16,7 +16,10 @@
             <v-list-item @click="generarActa" v-if="status === 'C'" v-role:any="'titulacion|division-estudios'">
                 <v-list-item-title>Generar acta</v-list-item-title>
             </v-list-item>
-            <v-list-item @click="" v-role:any="'titulacion|division-estudios'">
+            <v-list-item @click="generarMemoSinodales"
+                         v-if="!hasMemo"
+                         v-role:any="'titulacion|division-estudios'"
+            >
                 <v-list-item-title>Generar memo sinodales</v-list-item-title>
             </v-list-item>
             <v-list-item @click="" v-if="hasSinodales" v-role:any="'titulacion|division-estudios'">
@@ -80,6 +83,17 @@
             modificarSinodales() {
                 let nombramientoId = this.nombramientoId;
                 this.$router.push({name: 'sinodales-edit', params: {nombramientoId}});
+            },
+            generarMemoSinodales() {
+                let payload = {nombramiento: this.nombramientoId};
+
+                this.$store.dispatch('titulaciones/storeMemoSinodales', payload)
+                    .then(res => {
+                        this.$emit('syncDraft');
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
             }
         },
         watch: {},
@@ -88,6 +102,13 @@
                 return this.sinodales.length
             },
             hasActa() {
+            },
+            hasMemo() {
+                let getById = this.$store.getters['titulaciones/getTitulacionById'];
+
+                let titulacion = getById(this.nombramientoId);
+
+                return titulacion.archivos.find(archivo => archivo.documento === 'MEMO SINODALES');
             }
         }
     }
