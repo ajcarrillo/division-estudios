@@ -16,8 +16,8 @@ class CreateArchivosTable extends Migration
         Schema::create('archivos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->morphs('fileable');
-            $table->unsignedInteger('documento_id');
-            $table->foreign('documento_id')->references('id')->on('documentos');
+            $table->string('documento');
+            $table->foreign('documento')->references('descripcion')->on('documentos');
             $table->text('file_name');
             $table->text('file_path');
             $table->string('file_extension', 5)->nullable();
