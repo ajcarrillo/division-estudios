@@ -2,6 +2,8 @@ window._ = require('lodash');
 window.axios = require('axios');
 window.moment = require('moment');
 
+moment.locale('es');
+
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 let token = document.head.querySelector('meta[name="csrf-token"]');
@@ -19,6 +21,16 @@ if (apiToken) {
 } else {
     console.warn('Check api token');
 }
+
+window.dateForHummans = (date) => {
+    let fecha = moment(date).format('dddd D \\d\\e MMMM \\d\\e YYYY');
+    return `${fecha.charAt(0).toUpperCase()}${fecha.slice(1)}`;
+
+};
+
+window.clone = function (obj) {
+    return JSON.parse(JSON.stringify(obj));
+};
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
