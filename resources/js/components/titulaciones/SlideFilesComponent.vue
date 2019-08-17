@@ -5,7 +5,7 @@
         <v-slide-group multiple show-arrows>
             <v-slide-item
                 :key="item.id"
-                v-for="item in archivos"
+                v-for="item in files"
                 v-slot:default="{ active, toggle }"
             >
                 <v-btn
@@ -42,7 +42,15 @@
         },
         methods: {},
         watch: {},
-        computed: {}
+        computed: {
+            files() {
+                if (this.$laravel.hasRole('jefe-departamento')) {
+                    return this.archivos.filter(archivo => archivo.documento === 'NOMBRAMIENTO');
+                } else {
+                    return this.archivos;
+                }
+            }
+        }
     }
 </script>
 
