@@ -20,5 +20,10 @@ export default {
         let index = state.titulaciones.findIndex(titulacion => titulacion.id === id);
 
         state.titulaciones[index].sinodales = sinodales;
+    },
+    UPDATE_ESTATUS(state, payload) {
+        let index = state.titulaciones.findIndex(titulacion => titulacion.id === payload);
+
+        state.titulaciones[index].estatus = 'E'
     }
 }

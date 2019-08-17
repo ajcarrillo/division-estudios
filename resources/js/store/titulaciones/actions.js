@@ -59,6 +59,7 @@ export default {
                     let payload = {id: nombramiento, archivo: res.data.archivo};
 
                     context.commit('SET_ARCHIVOS', payload);
+                    context.commit('UPDATE_ESTATUS', nombramiento);
 
                     resolve(res);
                 })
