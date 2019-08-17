@@ -2,6 +2,7 @@
 
 use DivisionEstudios\Http\Controllers\Api\v1\ActaExamenController;
 use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\MaestroController;
+use DivisionEstudios\Http\Controllers\Api\v1\DocumentoNombramientoController;
 use DivisionEstudios\Http\Controllers\Api\v1\MemoSinodalesController;
 use DivisionEstudios\Http\Controllers\Api\v1\NombramientoController;
 use DivisionEstudios\Http\Controllers\Api\v1\SinodalesController;
@@ -43,6 +44,8 @@ Route::prefix('/v1')
                         Route::post('/{nombramiento}', [ ActaExamenController::class, 'store' ])->name('store');
                         Route::get('/{nombramiento}', [ ActaExamenController::class, 'download' ])->name('download');
                     });
+
+                Route::post('/{nombramiento}/generar-documento', [ DocumentoNombramientoController::class, 'store' ])->name('generar.documento');
 
                 Route::prefix('/{nombramiento}/sinodales')
                     ->name('sinodales.')

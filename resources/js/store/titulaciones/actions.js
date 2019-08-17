@@ -59,7 +59,7 @@ export default {
                     let payload = {id: nombramiento, archivo: res.data.archivo};
 
                     context.commit('SET_ARCHIVOS', payload);
-                    context.commit('UPDATE_ESTATUS', nombramiento);
+                    context.commit('UPDATE_ESTATUS', {id: nombramiento, status: 'E'});
 
                     resolve(res);
                 })
@@ -68,5 +68,27 @@ export default {
                     reject(err.response.data);
                 })
         });
+    },
+    storeNombramiento(context, payload) {
+        return new Promise((resolve, reject) => {
+            let {nombramiento, numero_oficio} = payload;
+            axios.post(route('api.v1.nombramientos.generar.documento', nombramiento), {
+                numero_oficio: numero_oficio
+            })
+                .then(res => {
+                    let payload = {id: nombramiento, archivo: res.data.archivo};
+
+                    context.commit('SET_ARCHIVOS', payload);
+                    context.commit('UPDATE_ESTATUS', {id: nombramiento, status: 'C'});
+                    context.commit('UPDATE_NUMERO_OFICIO', {id: nombramiento, numero_oficio});
+
+                    resolve(res);
+                })
+                .catch(err => {
+                    console.log(err);
+
+                    reject(err);
+                })
+        })
     }
 }

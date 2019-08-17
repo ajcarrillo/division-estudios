@@ -6,9 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Nombramiento extends Model
 {
-    protected $table   = 'nombramientos';
-    protected $guarded = [];
-    protected $dates   = [
+    protected $table    = 'nombramientos';
+    protected $fillable = [
+        'numero_memo_id',
+        'numero_oficio',
+        'alumno_id',
+        'opcion_id',
+        'modulo_id',
+        'proyecto',
+        'fecha',
+        'horario_id',
+        'estatus',
+    ];
+    protected $dates    = [
         'fecha',
     ];
 

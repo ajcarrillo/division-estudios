@@ -22,8 +22,14 @@ export default {
         state.titulaciones[index].sinodales = sinodales;
     },
     UPDATE_ESTATUS(state, payload) {
-        let index = state.titulaciones.findIndex(titulacion => titulacion.id === payload);
+        let {id, status} = payload;
+        let index = state.titulaciones.findIndex(titulacion => titulacion.id === id);
 
-        state.titulaciones[index].estatus = 'E'
+        state.titulaciones[index].estatus = status;
+    },
+    UPDATE_NUMERO_OFICIO(state, payload) {
+        let {id, numero_oficio} = payload;
+        let index = state.titulaciones.findIndex(titulacion => titulacion.id === id);
+        state.titulaciones[index].numero_oficio = numero_oficio;
     }
 }

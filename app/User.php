@@ -2,6 +2,7 @@
 
 namespace DivisionEstudios;
 
+use DivisionEstudios\Models\JefeDepartamento;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -36,4 +37,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function departamento()
+    {
+        return $this->hasOne(JefeDepartamento::class, 'responsable_id');
+    }
 }
