@@ -15,14 +15,16 @@ export default {
     },
     storeActa(context, payload) {
         return new Promise(function (resolve, reject) {
-            axios.post(route('api.v1.nombramientos.actas.store', payload))
+            let nombramiento = payload;
+
+            axios.post(route('api.v1.nombramientos.actas.store', nombramiento))
                 .then(res => {
-                    let payload = {id: payload, archivo: res.data.archivo};
+                    let payload = {id: nombramiento, archivo: res.data.archivo};
                     context.commit('SET_ARCHIVOS', payload);
                     resolve(res);
                 })
                 .catch(err => {
-                    console.log(err.response.data);
+                    console.log(err);
                     reject(err);
                 })
         })

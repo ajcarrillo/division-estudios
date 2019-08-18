@@ -13,10 +13,10 @@
         </template>
         <v-list>
             <template v-if="status === 'C'">
-                <v-list-item @click="" v-role:any="'titulacion|division-estudios'">
+                <v-list-item @click="" v-if="!hasJuramento" v-role:any="'titulacion|division-estudios'">
                     <v-list-item-title>Generar juramento</v-list-item-title>
                 </v-list-item>
-                <v-list-item @click="generarActa" v-role:any="'titulacion|division-estudios'">
+                <v-list-item @click="generarActa" v-if="!hasActa" v-role:any="'titulacion|division-estudios'">
                     <v-list-item-title>Generar acta</v-list-item-title>
                 </v-list-item>
             </template>
@@ -132,7 +132,7 @@
             generarActa() {
                 this.$store.dispatch('titulaciones/storeActa', this.nombramientoId)
                     .then(res => {
-
+                        this.$emit('syncDraft');
                     })
                     .catch(err => {
 
@@ -191,6 +191,14 @@
                 return this.sinodales.length
             },
             hasActa() {
+                let titulacion = getTitulacion.call(this);
+
+                return titulacion.archivos.find(archivo => archivo.documento === 'ACTA');
+            },
+            hasJuramento() {
+                let titulacion = getTitulacion.call(this);
+
+                return titulacion.archivos.find(archivo => archivo.documento === 'JURAMENTO');
             },
             hasMemo() {
                 let titulacion = getTitulacion.call(this);
