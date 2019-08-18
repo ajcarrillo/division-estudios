@@ -92,5 +92,18 @@ export default {
                     reject(err);
                 })
         })
+    },
+    storeJuramento(context, payload) {
+        return new Promise((resolve, reject) => {
+            axios.post(route('api.v1.nombramientos.juramentos.store', payload))
+                .then(res => {
+                    context.commit('SET_ARCHIVOS', {id: payload, archivo: res.data.archivo});
+                    resolve(res);
+                })
+                .catch(err => {
+                    console.log(err);
+                    reject(err);
+                })
+        })
     }
 }

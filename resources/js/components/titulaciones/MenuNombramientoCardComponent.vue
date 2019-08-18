@@ -13,7 +13,7 @@
         </template>
         <v-list>
             <template v-if="status === 'C'">
-                <v-list-item @click="" v-if="!hasJuramento" v-role:any="'titulacion|division-estudios'">
+                <v-list-item @click="generarJuramento" v-if="!hasJuramento" v-role:any="'titulacion|division-estudios'">
                     <v-list-item-title>Generar juramento</v-list-item-title>
                 </v-list-item>
                 <v-list-item @click="generarActa" v-if="!hasActa" v-role:any="'titulacion|division-estudios'">
@@ -183,6 +183,15 @@
                         }
                     })
 
+            },
+            generarJuramento() {
+                this.$store.dispatch('titulaciones/storeJuramento', this.nombramientoId)
+                    .then(res => {
+                        this.$emit('syncDraft');
+                    })
+                    .catch(err => {
+
+                    })
             }
         },
         watch: {},
