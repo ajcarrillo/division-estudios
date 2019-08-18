@@ -36,7 +36,7 @@ class JuramentoController extends Controller
 
             $archivo = new Archivo([
                 'documento'      => 'JURAMENTO',
-                'file_name'      => 'acta',
+                'file_name'      => 'juramento',
                 'file_path'      => "app/public/nombramientos/{$nombramiento->id}/juramento.docx",
                 'file_extension' => 'docx',
                 'disk'           => '',
