@@ -20,21 +20,18 @@
                     <v-list-item-title>Generar acta</v-list-item-title>
                 </v-list-item>
             </template>
-
             <v-list-item @click="generarMemoSinodales"
                          v-if="!hasMemo"
                          v-role:any="'titulacion|division-estudios'"
             >
                 <v-list-item-title>Generar memo sinodales</v-list-item-title>
             </v-list-item>
-
             <v-list-item @click.stop="asignarNumeroOficio"
                          v-if="hasSinodales && !hasNumeroOficio"
                          v-role:any="'jefe-departamento|division-estudios'"
             >
                 <v-list-item-title>Generar nombramiento</v-list-item-title>
             </v-list-item>
-
             <template v-if="hasSinodales && !hasNumeroOficio">
                 <template v-if="hasSinodales">
                     <v-list-item @click="modificarSinodales" v-if="status === 'E'" v-role:any="'jefe-departamento|division-estudios'">
@@ -47,6 +44,19 @@
                     </v-list-item>
                 </template>
             </template>
+
+            <template v-if="files.length">
+                <v-list-item
+                    :key="i"
+                    :to="`/nombramientos/${nombramientoId}/descargar/${file.file_name}`"
+                    v-for="(file, i) in files"
+                >
+                    <v-list-item-title>
+                        {{ `Descargar ${file.documento.toLowerCase()}` }}
+                    </v-list-item-title>
+                </v-list-item>
+            </template>
+
         </v-list>
         <v-dialog
             max-width="600px"
@@ -218,6 +228,13 @@
                 let titulacion = getTitulacion.call(this);
 
                 return titulacion.numero_oficio;
+            },
+            files() {
+                if (this.$laravel.hasRole('jefe-departamento')) {
+                    return this.archivos.filter(archivo => archivo.documento === 'NOMBRAMIENTO');
+                } else {
+                    return this.archivos.filter(archivo => archivo.documento !== 'NOMBRAMIENTO');
+                }
             }
         }
     }

@@ -47,19 +47,15 @@
                 </v-list-item>
             </v-list>
         </v-card-text>
-        <v-divider class="mx-4" light></v-divider>
-        <slide-files :archivos="archivos" v-if="archivos.length"></slide-files>
     </v-card>
 </template>
 
 <script>
     import MenuNombramientoCard from "./MenuNombramientoCardComponent";
-    import SlideFiles from "./SlideFilesComponent";
 
     export default {
         name: "NombramientoCardComponent",
         components: {
-            SlideFiles,
             MenuNombramientoCard
         },
         props: {
