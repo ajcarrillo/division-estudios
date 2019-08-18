@@ -47,7 +47,7 @@
                 if (this.$laravel.hasRole('jefe-departamento')) {
                     return this.archivos.filter(archivo => archivo.documento === 'NOMBRAMIENTO');
                 } else {
-                    return this.archivos;
+                    return this.archivos.filter(archivo => archivo.documento !== 'NOMBRAMIENTO');
                 }
             }
         }
