@@ -2,10 +2,13 @@
 
 namespace DivisionEstudios\Models;
 
+use DivisionEstudios\Traits\FilterBy;
 use Illuminate\Database\Eloquent\Model;
 
 class Nombramiento extends Model
 {
+    use FilterBy;
+
     protected $table    = 'nombramientos';
     protected $fillable = [
         'numero_memo_id',
