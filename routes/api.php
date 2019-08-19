@@ -1,6 +1,8 @@
 <?php
 
 use DivisionEstudios\Http\Controllers\Api\v1\ActaExamenController;
+use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\AlumnoController;
+use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\HorarioController;
 use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\MaestroController;
 use DivisionEstudios\Http\Controllers\Api\v1\DocumentoNombramientoController;
 use DivisionEstudios\Http\Controllers\Api\v1\JuramentoController;
@@ -30,6 +32,8 @@ Route::prefix('/v1')
         Route::prefix('/catalogos')
             ->name('catalogos.')
             ->group(function () {
+                Route::get('/alumnos', [ AlumnoController::class, 'index' ])->name('alumnos.index');
+                Route::get('/horarios', [ HorarioController::class, 'index' ])->name('horarios.index');
                 Route::get('/maestros', [ MaestroController::class, 'index' ])->name('maestros.index');
             });
 
