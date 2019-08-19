@@ -3,6 +3,7 @@
 namespace DivisionEstudios\Http\Controllers;
 
 use Auth;
+use DivisionEstudios\Models\Opcion;
 
 class AppController extends Controller
 {
@@ -12,6 +13,11 @@ class AppController extends Controller
         $roles    = $user->getRoleNames();
         $apiToken = $user->api_token;
 
+        $opciones = Opcion::query()
+            ->with('modulos')
+            ->orderBy('descripcion')
+            ->get();
+
         return view('home', [
             'user'     => [
                 'name'  => $user->name,
@@ -19,6 +25,7 @@ class AppController extends Controller
             ],
             'roles'    => $roles,
             'apiToken' => $apiToken,
+            'opciones' => $opciones,
         ]);
     }
 }

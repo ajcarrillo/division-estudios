@@ -145,5 +145,6 @@
         window.user = {!! json_encode($user) !!};
         window.roles = {!! json_encode($roles) !!};
         window.api_token = {!! json_encode($apiToken) !!};
+        window.opciones = {!! json_encode($opciones) !!};
     </script>
 @endsection
