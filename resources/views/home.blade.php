@@ -56,6 +56,8 @@
                             <v-list-item
                                 v-for="(child, i) in item.children"
                                 :key="i"
+                                :to="child.link"
+                                exact
                                 @click=""
                             >
                                 <v-list-item-action v-if="child.icon">

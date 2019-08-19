@@ -121,9 +121,15 @@
                 Guardar
             </v-btn>
             <v-btn
-                depressed
+                @click="$router.push({name:'titulaciones-index'})"
+                bottom
+                color="blue darken-3"
+                dark
+                fab
+                fixed
+                right
             >
-                Regresar
+                <v-icon>mdi-arrow-left</v-icon>
             </v-btn>
         </form>
     </div>

@@ -27,7 +27,16 @@ const app = new Vue({
         dialog: false,
         drawer: null,
         items: [
-            {icon: 'mdi-book-open-variant', text: 'Titulaciones', link: '/app/titulaciones'},
+            {
+                icon: 'mdi-chevron-up',
+                'icon-alt': 'mdi-chevron-down',
+                text: 'Titulaciones',
+                model: false,
+                children: [
+                    {icon: 'mdi-format-list-bulleted', text: 'Ver listado', link: '/app/titulaciones'},
+                    {icon: 'mdi-plus', text: 'Nueva', link: '/app/titulaciones/nueva'},
+                ]
+            },
             {icon: 'mdi-code-equal', text: 'Convalidaciones', link: '/app/convalidaciones'},
             /*{icon: 'mdi-content-copy', text: 'Duplicates'},
             {
