@@ -18,7 +18,7 @@ class AlumnoController extends Controller
 {
     public function index(Request $request, AlumnoFilters $filters)
     {
-        $params = $request->only([ 'numero_control', 'sin_nombramiento' ]);
+        $params = $request->only([ 'numero_control', 'sinNombramiento' ]);
 
         $alumno = Alumno::query()
             ->with('carrera')
