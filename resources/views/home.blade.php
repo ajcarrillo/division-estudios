@@ -96,44 +96,42 @@
                 dark
             >
                 <v-toolbar-title
-                    style="width: 388px"
                     class="ml-0 pl-3"
                 >
-                    <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-                    <span class="hidden-sm-and-down">
-                        División de Estudios Profesionales
+                    <span class="d-flex align-center">
+                        <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="mr-4"></v-app-bar-nav-icon>
+                        <v-img
+                            src="/img/logo.png"
+                            alt="ITCh"
+                            aspect-radio="1"
+                            max-width="32"
+                            class="mr-4"
+                        ></v-img>
+                        <span class="hidden-sm-and-down">
+                            División de Estudios Profesionales
+                        </span>
                     </span>
                 </v-toolbar-title>
-                <v-text-field
-                    flat
-                    solo-inverted
-                    hide-details
-                    prepend-inner-icon="mdi-magnify"
-                    label="Search"
-                    class="hidden-sm-and-down"
-                ></v-text-field>
                 <v-spacer></v-spacer>
-                <v-btn icon>
-                    <v-icon>mdi-apps</v-icon>
-                </v-btn>
-                <v-btn icon>
-                    <v-icon>mdi-bell</v-icon>
-                </v-btn>
-                <v-btn
-                    icon
-                    large
-                >
-                    <v-avatar
-                        size="32px"
-                        item
-                    >
-                        <v-img
-                            src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
-                            alt="Vuetify"
+                <v-menu v-if="user" offset-y>
+                    <template v-slot:activator="{ on }">
+                        <v-btn
+                            text
+                            v-on="on"
                         >
-                        </v-img>
-                    </v-avatar>
-                </v-btn>
+                            <span class="d-flex flex-column">
+                                <span class="text-left">{{ user.name }}</span>
+                                <span class="text-left">{{ roles[0] }}</span>
+                            </span>
+                            <v-icon right>mdi-menu-down</v-icon>
+                        </v-btn>
+                    </template>
+                    <v-list>
+                        <v-list-item @click="logout">
+                            <v-list-item-title>Cerrar sesión</v-list-item-title>
+                        </v-list-item>
+                    </v-list>
+                </v-menu>
             </v-app-bar>
             <v-content>
                 <router-view></router-view>

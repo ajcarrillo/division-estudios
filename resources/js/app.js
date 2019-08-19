@@ -9,6 +9,7 @@ import store from './store'
 import vuetify from "./plugins/vuetify";
 import VeeValidate from 'vee-validate'
 import LaravelPermissions from 'laravel-permissions';
+import {mapState} from 'vuex';
 
 Vue.use(LaravelPermissions);
 
@@ -74,12 +75,19 @@ const app = new Vue({
         },
         snackbarText() {
             return this.$store.state.auth.snackbarText;
-        }
+        },
+        ...mapState({
+            user: state => state.auth.user,
+            roles: state => state.auth.roles,
+        })
     },
     methods: {
         closeSnackBar() {
             this.$store.dispatch('auth/toogleSnackbar')
-        }
+        },
+        logout() {
+            document.getElementById('logout-form').submit();
+        },
     },
     mounted() {
         this.$store.dispatch('auth/fetchUser', window.user);
