@@ -41,6 +41,7 @@ Route::prefix('/v1')
             ->middleware([ 'auth:api' ])
             ->name('nombramientos.')
             ->group(function () {
+                Route::post('/', [ NombramientoController::class, 'store' ])->name('store');
                 Route::get('/', [ NombramientoController::class, 'index' ])->name('index');
 
                 Route::prefix('/acta')
