@@ -11,17 +11,18 @@ namespace DivisionEstudios\Http\Controllers\Api\v1\Catalogos;
 
 use DivisionEstudios\Http\Controllers\Controller;
 use DivisionEstudios\Models\Alumno;
+use DivisionEstudios\Models\Filters\AlumnoFilters;
 use Illuminate\Http\Request;
 
 class AlumnoController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, AlumnoFilters $filters)
     {
-        $id = $request->query('numero_control');
+        $params = $request->only([ 'numero_control', 'sin_nombramiento' ]);
 
         $alumno = Alumno::query()
             ->with('carrera')
-            ->where('numero_control', $id)
+            ->filterBy($filters, $params)
             ->first();
 
         return [ 'alumno' => $alumno ];
