@@ -136,6 +136,19 @@
             <v-content>
                 <router-view></router-view>
             </v-content>
+            <v-snackbar
+                v-model="snackbar"
+                :timeout="0"
+            >
+                {{ snackbarText }}
+                <v-btn
+                    color="pink"
+                    text
+                    @click="closeSnackBar"
+                >
+                    Close
+                </v-btn>
+            </v-snackbar>
         </v-app>
     @endverbatim
 @endsection

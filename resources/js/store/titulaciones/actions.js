@@ -122,5 +122,24 @@ export default {
                     reject(err);
                 })
         });
+    },
+    storeNuevoNombramiento({commit, dispatch}, payload) {
+        return new Promise((resolve, reject) => {
+            let {alumno_id, opcion_id, modulo_id, proyecto, fecha, horario_id} = payload;
+            let data = {alumno_id, opcion_id, modulo_id, proyecto, fecha, horario_id};
+
+            axios.post(route('api.v1.nombramientos.store'), data)
+                .then(res => {
+                    dispatch('auth/setSnackbarMessage', 'El nombramiento se guardó correctamente', {root: true});
+                    dispatch('auth/toogleSnackbar', null, {root: true});
+                    resolve(res);
+                })
+                .catch(err => {
+                    dispatch('auth/setSnackbarMessage', 'Lo sentimos, ha ocurrido un error intenta de nuevo', {root: true});
+                    dispatch('auth/toogleSnackbar', null, {root: true});
+                    console.log(err);
+                    reject(err);
+                })
+        })
     }
 }

@@ -59,6 +59,19 @@ const app = new Vue({
             {icon: 'mdi-keyboard', text: 'Go to the old version'},*/
         ],
     }),
+    computed: {
+        snackbar() {
+            return this.$store.state.auth.snackbar;
+        },
+        snackbarText() {
+            return this.$store.state.auth.snackbarText;
+        }
+    },
+    methods: {
+        closeSnackBar() {
+            this.$store.dispatch('auth/toogleSnackbar')
+        }
+    },
     mounted() {
         this.$store.dispatch('auth/fetchUser', window.user);
         this.$store.dispatch('auth/fetchRoles', window.roles);
