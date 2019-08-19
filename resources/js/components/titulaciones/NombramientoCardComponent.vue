@@ -66,7 +66,7 @@
         },
         data() {
             return {
-                draft: clone(this.nombramiento),
+                draft: this.nombramiento,
             }
         },
         methods: {

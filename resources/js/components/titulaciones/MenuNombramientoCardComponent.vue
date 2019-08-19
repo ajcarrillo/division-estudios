@@ -12,11 +12,11 @@
             </v-btn>
         </template>
         <v-list>
-            <template v-if="status === 'C'">
-                <v-list-item @click="generarJuramento" v-if="!hasJuramento" v-role:any="'titulacion|division-estudios'">
+            <template v-if="status === 'C' && isTitulacionOrDivision">
+                <v-list-item @click="generarJuramento" v-if="!hasJuramento">
                     <v-list-item-title>Generar juramento</v-list-item-title>
                 </v-list-item>
-                <v-list-item @click="generarActa" v-if="!hasActa" v-role:any="'titulacion|division-estudios'">
+                <v-list-item @click="generarActa" v-if="!hasActa">
                     <v-list-item-title>Generar acta</v-list-item-title>
                 </v-list-item>
             </template>
@@ -33,16 +33,14 @@
                 <v-list-item-title>Generar nombramiento</v-list-item-title>
             </v-list-item>
             <template v-if="hasSinodales && !hasNumeroOficio">
-                <template v-if="hasSinodales">
-                    <v-list-item @click="modificarSinodales" v-if="status === 'E'" v-role:any="'jefe-departamento|division-estudios'">
-                        <v-list-item-title>Modificar sinodales</v-list-item-title>
-                    </v-list-item>
-                </template>
-                <template v-else>
-                    <v-list-item @click="agregarSinodales" v-if="status === 'E'" v-role:any="'jefe-departamento|division-estudios'">
-                        <v-list-item-title>Agregar sinodales</v-list-item-title>
-                    </v-list-item>
-                </template>
+                <v-list-item @click="modificarSinodales" v-if="status === 'E'" v-role:any="'jefe-departamento|division-estudios'">
+                    <v-list-item-title>Modificar sinodales</v-list-item-title>
+                </v-list-item>
+            </template>
+            <template v-else>
+                <v-list-item @click="agregarSinodales" v-if="status === 'E'" v-role:any="'jefe-departamento|division-estudios'">
+                    <v-list-item-title>Agregar sinodales</v-list-item-title>
+                </v-list-item>
             </template>
 
             <template v-if="files.length">
@@ -142,7 +140,7 @@
             generarActa() {
                 this.$store.dispatch('titulaciones/storeActa', this.nombramientoId)
                     .then(res => {
-                        this.$emit('syncDraft');
+                        //this.$emit('syncDraft');
                     })
                     .catch(err => {
 
@@ -161,7 +159,7 @@
 
                 this.$store.dispatch('titulaciones/storeMemoSinodales', payload)
                     .then(res => {
-                        this.$emit('syncDraft');
+                        //this.$emit('syncDraft');
                     })
                     .catch(err => {
                         console.log(err);
@@ -183,7 +181,7 @@
 
                             this.$store.dispatch('titulaciones/storeNombramiento', payload)
                                 .then(res => {
-                                    this.$emit('syncDraft');
+                                    //this.$emit('syncDraft');
                                     this.loadingModal = false;
                                     this.dialog = false;
                                 })
@@ -197,7 +195,7 @@
             generarJuramento() {
                 this.$store.dispatch('titulaciones/storeJuramento', this.nombramientoId)
                     .then(res => {
-                        this.$emit('syncDraft');
+                        //this.$emit('syncDraft');
                     })
                     .catch(err => {
 
@@ -235,6 +233,9 @@
                 } else {
                     return this.archivos.filter(archivo => archivo.documento !== 'NOMBRAMIENTO');
                 }
+            },
+            isTitulacionOrDivision() {
+                return this.$laravel.hasAnyRole('titulacion|division-estudios');
             }
         }
     }
