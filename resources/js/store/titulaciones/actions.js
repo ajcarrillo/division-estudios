@@ -105,5 +105,22 @@ export default {
                     reject(err);
                 })
         })
+    },
+    fetchOpciones(context, payload) {
+        context.commit('SET_OPCIONES', payload);
+    },
+    fetchHoras(context, payload) {
+        return new Promise((resolve, reject) => {
+            let params = {fecha: payload};
+            axios.get(route('api.v1.catalogos.horarios.index'), {params})
+                .then(res => {
+                    context.commit('SET_HORAS', res.data.items);
+                    resolve(res);
+                })
+                .catch(err => {
+                    console.log(err);
+                    reject(err);
+                })
+        });
     }
 }

@@ -1,4 +1,6 @@
 export default {
     titulaciones: [],
-    pagination: {}
+    pagination: {},
+    opciones: [],
+    horas: []
 }

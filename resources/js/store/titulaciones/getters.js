@@ -4,5 +4,11 @@ export default {
     },
     getTitulacionById: (state) => (id) => {
         return state.titulaciones.find(titulacion => titulacion.id === id);
+    },
+    getOpciones: (state) => {
+        return state.opciones;
+    },
+    getHoras: (state) => {
+        return state.horas;
     }
 }

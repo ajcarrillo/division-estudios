@@ -31,5 +31,11 @@ export default {
         let {id, numero_oficio} = payload;
         let index = state.titulaciones.findIndex(titulacion => titulacion.id === id);
         state.titulaciones[index].numero_oficio = numero_oficio;
+    },
+    SET_OPCIONES(state, payload) {
+        state.opciones = payload;
+    },
+    SET_HORAS(state, payload) {
+        state.horas = payload;
     }
 }
