@@ -19,6 +19,7 @@
 </template>
 
 <script>
+    import {mapActions} from 'vuex';
     import SinodalesForm from "../../components/titulaciones/forms/SinodalesFormComponent";
 
     export default {
@@ -53,13 +54,18 @@
                 this.$store.dispatch('titulaciones/storeSinodales', payload)
                     .then(res => {
                         this.saving = false;
+                        this['auth/setSnackbarMessage']('Los sinodales se guardaron correctamente');
+                        this['auth/toogleSnackbar'](true);
                     })
                     .catch(err => {
-
+                        this['auth/setSnackbarMessage']('Lo sentimos, ha ocurrido un error, intenta de nuevo');
+                        this['auth/toogleSnackbar'](true);
                     })
-
-
-            }
+            },
+            ...mapActions([
+                'auth/setSnackbarMessage',
+                'auth/toogleSnackbar'
+            ])
         },
         watch: {},
         computed: {}
