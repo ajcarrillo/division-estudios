@@ -37,7 +37,7 @@
                 </v-alert>
             </v-col>
         </v-row>
-        <form>
+        <form @submit.prevent="submit">
             <v-autocomplete
                 :error-messages="errors.collect('draft.opcion')"
                 :items="opciones"
@@ -60,7 +60,8 @@
                 required
                 return-object
                 v-model="draft.modulo"
-                v-show="modulos.length"
+                key="draft.modulo"
+                v-if="modulos.length"
                 v-validate="'required'"
             ></v-autocomplete>
             <v-textarea
@@ -136,6 +137,8 @@
 </template>
 
 <script>
+    import {mapActions} from 'vuex';
+
     const _ = require('lodash');
 
     export default {
@@ -179,13 +182,14 @@
         },
         methods: {
             submit() {
-                this.loading = true;
+                this.$emit('loading');
                 this.$validator.validateAll()
                     .then(res => {
+
                         let payload = {
                             alumno_id: this.alumno.id,
                             opcion_id: this.draft.opcion.id,
-                            modulo_id: this.draft.modulo.id,
+                            modulo_id: this.draft.modulo ? this.draft.modulo.id : null,
                             proyecto: this.draft.proyecto,
                             fecha: this.draft.fecha,
                             horario_id: this.draft.hora.id
@@ -194,11 +198,20 @@
                         this.$store.dispatch('titulaciones/storeNuevoNombramiento', payload)
                             .then(res => {
                                 this.clear();
-                                this.loading = false;
+                                this.$emit('loading');
+
+                                this['auth/setSnackbarMessage']('El nombramiento se guardó correctamente');
+                                this['auth/toogleSnackbar'](true);
+                            })
+                            .catch(err => {
+                                console.log(err);
+
+                                this['auth/setSnackbarMessage']('Lo sentimos, ha ocurrido un error, intente de nuevo');
+                                this['auth/toogleSnackbar'](true);
                             });
                     })
                     .catch(err => {
-                        this.loading = false;
+                        this.$emit('loading');
                     })
             },
             buscarAlumno() {
@@ -228,7 +241,11 @@
 
                 this.$validator.reset();
 
-            }
+            },
+            ...mapActions([
+                'auth/setSnackbarMessage',
+                'auth/toogleSnackbar'
+            ])
         },
         watch: {
             opcion() {
