@@ -1,7 +1,10 @@
 export default {
     fetchTitulaciones(context, payload) {
         return new Promise(function (resolve, reject) {
-            axios.get(route('api.v1.nombramientos.index'))
+            let {page} = payload;
+            let params = {page};
+
+            axios.get(route('api.v1.nombramientos.index'), {params})
                 .then(res => {
                     context.commit('SET_TITULACIONES', res.data.nombramientos.data);
                     context.commit('SET_PAGINATION', res.data.nombramientos);
