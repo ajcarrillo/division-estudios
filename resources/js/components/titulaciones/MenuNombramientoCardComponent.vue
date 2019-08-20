@@ -140,12 +140,16 @@
         },
         methods: {
             generarActa() {
+                this['auth/setSnackbarMessage']('El acta se está generando, espere un momento...');
+                this['auth/toogleSnackbar'](true);
                 this.$store.dispatch('titulaciones/storeActa', this.nombramientoId)
                     .then(res => {
-                        //this.$emit('syncDraft');
+                        this['auth/setSnackbarMessage']('El acta se generó correctamente');
+                        this['auth/toogleSnackbar'](true);
                     })
                     .catch(err => {
-
+                        this['auth/setSnackbarMessage']('Lo sentimos, ha ocurrido un error, intente de nuevo');
+                        this['auth/toogleSnackbar'](true);
                     })
             },
             agregarSinodales() {
@@ -169,6 +173,8 @@
                     })
                     .catch(err => {
                         console.log(err);
+                        this['auth/setSnackbarMessage']('Lo sentimos, ha ocurrido un error, intente de nuevo');
+                        this['auth/toogleSnackbar'](true);
                     })
             },
             asignarNumeroOficio() {
@@ -187,24 +193,30 @@
 
                             this.$store.dispatch('titulaciones/storeNombramiento', payload)
                                 .then(res => {
-                                    //this.$emit('syncDraft');
                                     this.loadingModal = false;
                                     this.dialog = false;
+                                    this['auth/setSnackbarMessage']('El nombramiento se generó correctamente');
+                                    this['auth/toogleSnackbar'](true);
                                 })
                                 .catch(err => {
-
+                                    this['auth/setSnackbarMessage']('Lo sentimos, ha ocurrido un error, intente de nuevo');
+                                    this['auth/toogleSnackbar'](true);
                                 });
                         }
                     })
 
             },
             generarJuramento() {
+                this['auth/setSnackbarMessage']('El juramento se está generando, espere un momento...');
+                this['auth/toogleSnackbar'](true);
                 this.$store.dispatch('titulaciones/storeJuramento', this.nombramientoId)
                     .then(res => {
-                        //this.$emit('syncDraft');
+                        this['auth/setSnackbarMessage']('El juramento se generó correctamente');
+                        this['auth/toogleSnackbar'](true);
                     })
                     .catch(err => {
-
+                        this['auth/setSnackbarMessage']('Lo sentimos, ha ocurrido un error, intente de nuevo');
+                        this['auth/toogleSnackbar'](true);
                     })
             },
             ...mapActions([
