@@ -11,7 +11,7 @@ export default {
     setSnackbarMessage(context, payload) {
         context.commit('SET_SNACKBAR_MESSAGE', payload);
     },
-    toogleSnackbar(context) {
-        context.commit('TOGGLE_SNACKBAR');
+    toogleSnackbar(context, toggle) {
+        context.commit('TOGGLE_SNACKBAR', toggle);
     }
 }

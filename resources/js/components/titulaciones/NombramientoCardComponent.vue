@@ -1,5 +1,6 @@
 <template>
-    <v-card>
+    <v-card
+    >
         <v-card-actions>
             <v-chip :class="classStatus"
             >
@@ -11,7 +12,6 @@
                 :sinodales="draft.sinodales"
                 :status="status"
                 :archivos="draft.archivos"
-                @syncDraft="syncDraft"
             ></menu-nombramiento-card>
         </v-card-actions>
         <v-divider light></v-divider>
@@ -70,9 +70,6 @@
             }
         },
         methods: {
-            syncDraft() {
-                this.draft = this.nombramiento;
-            }
         },
         watch: {},
         computed: {

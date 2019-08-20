@@ -100,6 +100,8 @@
 </template>
 
 <script>
+    import {mapActions} from 'vuex';
+
     function getTitulacion() {
         let getById = this.$store.getters['titulaciones/getTitulacionById'];
 
@@ -155,11 +157,15 @@
                 this.$router.push({name: 'sinodales-edit', params: {nombramientoId}});
             },
             generarMemoSinodales() {
+                this['auth/setSnackbarMessage']('Espera un momento estamos generando el memo...');
+                this['auth/toogleSnackbar'](true);
+
                 let payload = {nombramiento: this.nombramientoId};
 
                 this.$store.dispatch('titulaciones/storeMemoSinodales', payload)
                     .then(res => {
-                        //this.$emit('syncDraft');
+                        this['auth/setSnackbarMessage']('El memo se generó correctamente');
+                        this['auth/toogleSnackbar'](true);
                     })
                     .catch(err => {
                         console.log(err);
@@ -200,7 +206,11 @@
                     .catch(err => {
 
                     })
-            }
+            },
+            ...mapActions([
+                'auth/setSnackbarMessage',
+                'auth/toogleSnackbar'
+            ])
         },
         watch: {},
         computed: {

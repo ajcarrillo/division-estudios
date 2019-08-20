@@ -146,7 +146,7 @@
                     text
                     @click="closeSnackBar"
                 >
-                    Close
+                    Cerrar
                 </v-btn>
             </v-snackbar>
         </v-app>

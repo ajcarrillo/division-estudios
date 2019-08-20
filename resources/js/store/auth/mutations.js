@@ -11,7 +11,7 @@ export default {
     SET_SNACKBAR_MESSAGE(state, payload) {
         state.snackbarText = payload;
     },
-    TOGGLE_SNACKBAR(state) {
-        state.snackbar = !state.snackbar;
+    TOGGLE_SNACKBAR(state, payload) {
+        state.snackbar = payload;
     }
 }
