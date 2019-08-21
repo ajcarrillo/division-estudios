@@ -1,6 +1,7 @@
 window._ = require('lodash');
 window.axios = require('axios');
 window.moment = require('moment');
+window.Swal = require('sweetalert2');
 
 moment.locale('es');
 

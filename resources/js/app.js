@@ -47,7 +47,7 @@ const app = new Vue({
                     {icon: 'mdi-account-group', text: 'Alumnos', link: '/app/titulaciones'},
                     {icon: 'mdi-school', text: 'Carreras', link: '/app/titulaciones'},
                     {icon: 'mdi-account-tie', text: 'Maestros', link: '/app/titulaciones'},
-                    {icon: 'mdi-domain', text: 'Departamentos', link: '/app/titulaciones'},
+                    {icon: 'mdi-domain', text: 'Departamentos', link: '/app/catalogos/departamentos'},
                 ]
             },
             {icon: 'mdi-poll', text: 'Estadística', link: '/app/titulaciones'},

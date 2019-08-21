@@ -7,6 +7,8 @@ import CreateSinodales from "../views/titulaciones/CreateSinodales";
 import EditSinodales from "../views/titulaciones/EditSinodales";
 import CreateNombramiento from "../views/titulaciones/CreateNombramiento";
 import EditNombramiento from "../views/titulaciones/EditNombramiento";
+import DepartamentosIndex from "../views/catalogos/departamentos/Index";
+import CatalogosHome from "../views/catalogos/Home";
 
 export default {
     mode: 'history',
@@ -49,6 +51,18 @@ export default {
                             path: 'nueva',
                             component: CreateNombramiento,
                             name: 'titulaciones.nueva'
+                        }
+                    ]
+                },
+                {
+                    path: 'catalogos',
+                    component: CatalogosHome,
+                    children: [
+                        {
+                            path: 'departamentos',
+                            component: DepartamentosIndex,
+                            name: 'catalogos-departamentos'
+
                         }
                     ]
                 },
