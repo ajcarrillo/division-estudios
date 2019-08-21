@@ -1,6 +1,7 @@
 <template>
     <div>
         <v-text-field
+            v-if="action !== 'Edit'"
             @keyup.enter="buscarAlumno"
             autofocus
             data-vv-name="numero_control"
@@ -25,19 +26,19 @@
                     outlined
                     transition="scale-transition"
                 >
-                    <v-list-item style="min-height: 0!important;" three-line v-if="alumno">
+                    <v-list-item style="min-height: 0!important;" three-line v-if="!draft.alumno.empty">
                         <v-list-item-content class="py-0">
-                            <v-list-item-title class="subtitle-1 font-weight-medium">{{ alumno.nombre_completo }}</v-list-item-title>
-                            <v-list-item-subtitle>{{ alumno.numero_control }}</v-list-item-subtitle>
-                            <v-list-item-subtitle>{{ alumno.sexo|gender }}</v-list-item-subtitle>
-                            <v-list-item-subtitle>{{ alumno.carrera.descripcion }}</v-list-item-subtitle>
+                            <v-list-item-title class="subtitle-1 font-weight-medium">{{ draft.alumno.nombre_completo }}</v-list-item-title>
+                            <v-list-item-subtitle>{{ draft.alumno.numero_control }}</v-list-item-subtitle>
+                            <v-list-item-subtitle>{{ draft.alumno.sexo|gender }}</v-list-item-subtitle>
+                            <v-list-item-subtitle>{{ draft.alumno.carrera.descripcion }}</v-list-item-subtitle>
                             <v-list-item-subtitle>GENERACION: {{ generacion }}</v-list-item-subtitle>
                         </v-list-item-content>
                     </v-list-item>
                 </v-alert>
             </v-col>
         </v-row>
-        <form @submit.prevent="submit">
+        <form>
             <v-autocomplete
                 :error-messages="errors.collect('draft.opcion')"
                 :items="opciones"
@@ -51,7 +52,7 @@
                 v-validate="'required'"
             ></v-autocomplete>
             <v-autocomplete
-                :error-messages="errors.collect('draft.modulo')"
+                :disabled="!modulos.length"
                 :items="modulos"
                 data-vv-name="draft.modulo"
                 item-text="descripcion"
@@ -60,9 +61,9 @@
                 required
                 return-object
                 v-model="draft.modulo"
-                key="draft.modulo"
-                v-if="modulos.length"
-                v-validate="'required'"
+                :error-messages="modulos.length ? errors.collect('draft.modulo') : null"
+                :readonly="!modulos.length"
+                v-validate="!modulos.length ? null:'required'"
             ></v-autocomplete>
             <v-textarea
                 label="Proyecto"
@@ -100,26 +101,34 @@
                 </v-col>
                 <v-col cols="12" md="6">
                     <v-autocomplete
-                        :error-messages="errors.collect('draft.hora')"
+                        :error-messages="errors.collect('draft.horario')"
                         :items="horas"
-                        data-vv-name="draft.hora"
+                        data-vv-name="draft.horario"
                         item-text="hora"
                         item-value="id"
                         label="Hora"
                         prepend-icon="mdi-clock-outline"
                         required
                         return-object
-                        v-model="draft.hora"
+                        v-model="draft.horario"
                         v-validate="'required'"
                     ></v-autocomplete>
                 </v-col>
             </v-row>
+            <v-divider class="mb-4" light></v-divider>
             <v-btn
                 @click="submit"
                 class="primary mr-4"
                 depressed
             >
                 Guardar
+            </v-btn>
+            <v-btn
+                color="error"
+                text
+                v-if="action === 'Edit'"
+            >
+                Eliminar
             </v-btn>
             <v-btn
                 @click="$router.push({name:'titulaciones-index'})"
@@ -151,13 +160,20 @@
                 default: function () {
                     return {}
                 }
+            },
+            action: {
+                type: String,
+                default: 'New'
+            },
+            clearForm: {
+                type: Boolean,
+                required: true,
             }
         },
         data() {
             return {
                 draft: clone(this.nombramiento),
                 numero_control: '',
-                alumno: null,
                 opciones: [],
                 modulos: [],
                 horas: [],
@@ -169,7 +185,8 @@
                         'draft.opcion': 'Opción',
                         'draft.modulo': 'Módulo',
                         'draft.fecha': 'Fecha',
-                        'draft.hora': 'Hora'
+                        'draft.horario': 'Hora',
+                        'draft.proyecto': 'Proyecto'
                     }
                 }
             }
@@ -179,40 +196,28 @@
 
             this.$store.dispatch('titulaciones/fetchOpciones', window.opciones);
             this.opciones = this.$store.getters['titulaciones/getOpciones'];
+
+            if (this.action === 'Edit') {
+                this.fetchHoras();
+                this.alert = true;
+            }
         },
         methods: {
             submit() {
-                this.$emit('loading');
                 this.$validator.validateAll()
-                    .then(res => {
-
-                        let payload = {
-                            alumno_id: this.alumno.id,
-                            opcion_id: this.draft.opcion.id,
-                            modulo_id: this.draft.modulo ? this.draft.modulo.id : null,
-                            proyecto: this.draft.proyecto,
-                            fecha: this.draft.fecha,
-                            horario_id: this.draft.hora.id
-                        };
-
-                        this.$store.dispatch('titulaciones/storeNuevoNombramiento', payload)
-                            .then(res => {
-                                this.clear();
-                                this.$emit('loading');
-
-                                this['auth/setSnackbarMessage']('El nombramiento se guardó correctamente');
-                                this['auth/toogleSnackbar'](true);
-                            })
-                            .catch(err => {
-                                console.log(err);
-
-                                this['auth/setSnackbarMessage']('Lo sentimos, ha ocurrido un error, intente de nuevo');
-                                this['auth/toogleSnackbar'](true);
-                            });
-                    })
-                    .catch(err => {
-                        this.$emit('loading');
-                    })
+                    .then(isValid => {
+                        if (isValid && !this.draft.alumno.empty) {
+                            let payload = {
+                                alumno_id: this.draft.alumno.id,
+                                opcion_id: this.draft.opcion.id,
+                                modulo_id: this.draft.modulo ? this.draft.modulo.id : null,
+                                proyecto: this.draft.proyecto,
+                                fecha: this.draft.fecha,
+                                horario_id: this.draft.horario.id
+                            };
+                            this.$emit('save', payload);
+                        }
+                    });
             },
             buscarAlumno() {
                 this.$emit('loading');
@@ -220,31 +225,34 @@
 
                 axios.get(route('api.v1.catalogos.alumnos.index'), {params})
                     .then(res => {
-                        this.alumno = res.data.alumno;
+                        this.draft.alumno = res.data.alumno;
                         this.$emit('loading');
                         this.alert = !this.alert;
                     })
             },
             clear() {
-                this.draft.fecha = "";
-                this.draft.hora = null;
-                this.draft.modulo = null;
-                this.draft.opcion = null;
-                this.draft.proyecto = "";
+                this.draft = clone(this.nombramiento);
 
                 this.numero_control = '';
-                this.alumno = null;
                 this.horas = [];
                 this.modulos = [];
 
                 this.alert = !this.alert;
 
                 this.$validator.reset();
+            },
+            fetchHoras() {
+                this['titulaciones/fetchHoras'](moment(this.fecha).format('YYYY-MM-DD'))
+                    .then(res => {
+                        this.horas = res.data.items;
+                        this.horas.push({id: this.draft.horario.id, hora: this.draft.horario.hora.substr(0, 5)})
+                    })
+                    .catch(err => {
 
+                    })
             },
             ...mapActions([
-                'auth/setSnackbarMessage',
-                'auth/toogleSnackbar'
+                'titulaciones/fetchHoras'
             ])
         },
         watch: {
@@ -272,6 +280,11 @@
                     .catch(err => {
                         this.$emit('loading');
                     });
+            },
+            clearForm(clear) {
+                if (clear) {
+                    this.clear();
+                }
             }
         },
         computed: {

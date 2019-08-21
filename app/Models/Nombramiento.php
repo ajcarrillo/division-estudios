@@ -24,6 +24,9 @@ class Nombramiento extends Model
     protected $dates    = [
         'fecha',
     ];
+    protected $casts    = [
+        'fecha' => 'datetime:Y-m-d',
+    ];
 
     public function archivos()
     {
