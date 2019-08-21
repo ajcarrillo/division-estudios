@@ -200,6 +200,20 @@
             if (this.action === 'Edit') {
                 this.fetchHoras();
                 this.alert = true;
+
+                if (this.draft.opcion) {
+                    if (this.draft.opcion.modulos.length) {
+                        this.modulos = this.draft.opcion.modulos;
+                    } else {
+                        this.modulos = [];
+                        this.draft.modulo = null;
+                        this.draft.modulo_id = null;
+                    }
+                } else {
+                    this.modulos = [];
+                    this.draft.modulo = null;
+                    this.draft.modulo_id = null;
+                }
             }
         },
         methods: {
@@ -262,13 +276,14 @@
                         this.modulos = this.draft.opcion.modulos;
                     } else {
                         this.modulos = [];
-                        this.draft.modulo = null
+                        this.draft.modulo = null;
+                        this.draft.modulo_id = null;
                     }
                 } else {
                     this.modulos = [];
-                    this.draft.modulo = null
+                    this.draft.modulo = null;
+                    this.draft.modulo_id = null;
                 }
-
             },
             fecha() {
                 this.$emit('loading');

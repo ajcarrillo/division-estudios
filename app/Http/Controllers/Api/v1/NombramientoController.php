@@ -11,7 +11,7 @@ class NombramientoController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Nombramiento::with('sinodales', 'sinodales.maestro', 'memo', 'alumno', 'alumno.carrera', 'opcion', 'modulo', 'horario', 'archivos');
+        $query = Nombramiento::with('sinodales', 'sinodales.maestro', 'memo', 'alumno', 'alumno.carrera', 'opcion', 'opcion.modulos', 'modulo', 'horario', 'archivos');
 
         if (get_current_api_user()->hasRole('division-estudios')) {
 
@@ -37,5 +37,12 @@ class NombramientoController extends Controller
         $nombramiento->save();
 
         return ok(compact('nombramiento'));
+    }
+
+    public function update(Request $request, Nombramiento $nombramiento)
+    {
+        $nombramiento->update($request->input());
+
+        return ok([ 'nombramiento' => $nombramiento ]);
     }
 }

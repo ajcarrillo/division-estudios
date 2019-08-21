@@ -6,6 +6,7 @@ import ConvalidacionesHome from '../views/convalidaciones/Home'
 import CreateSinodales from "../views/titulaciones/CreateSinodales";
 import EditSinodales from "../views/titulaciones/EditSinodales";
 import CreateNombramiento from "../views/titulaciones/CreateNombramiento";
+import EditNombramiento from "../views/titulaciones/EditNombramiento";
 
 export default {
     mode: 'history',
@@ -36,6 +37,12 @@ export default {
                             path: ':nombramientoId/editar/sinodales',
                             component: EditSinodales,
                             name: 'sinodales-edit',
+                            props: true
+                        },
+                        {
+                            path: ':id/editar',
+                            component: EditNombramiento,
+                            name: 'edit-nombramiento',
                             props: true
                         },
                         {

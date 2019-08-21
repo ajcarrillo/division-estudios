@@ -43,6 +43,7 @@ Route::prefix('/v1')
             ->group(function () {
                 Route::post('/', [ NombramientoController::class, 'store' ])->name('store');
                 Route::get('/', [ NombramientoController::class, 'index' ])->name('index');
+                Route::patch('/{nombramiento}', [ NombramientoController::class, 'update' ])->name('update');
 
                 Route::prefix('/acta')
                     ->name('actas.')

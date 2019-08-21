@@ -12,6 +12,11 @@
             </v-btn>
         </template>
         <v-list>
+            <template v-if="status === 'P' && isTitulacionOrDivision">
+                <v-list-item @click="editNombramiento">
+                    <v-list-item-title>Editar</v-list-item-title>
+                </v-list-item>
+            </template>
             <template v-if="status === 'C' && isTitulacionOrDivision">
                 <v-list-item @click="generarJuramento" v-if="!hasJuramento">
                     <v-list-item-title>Generar juramento</v-list-item-title>
@@ -139,6 +144,9 @@
             }
         },
         methods: {
+            editNombramiento() {
+                this.$router.push({name: 'edit-nombramiento', params: {id: this.nombramientoId}});
+            },
             generarActa() {
                 this['auth/setSnackbarMessage']('El acta se está generando, espere un momento...');
                 this['auth/toogleSnackbar'](true);
