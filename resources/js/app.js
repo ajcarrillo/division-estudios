@@ -46,7 +46,7 @@ const app = new Vue({
                 children: [
                     {icon: 'mdi-account-group', text: 'Alumnos', link: '/app/titulaciones'},
                     {icon: 'mdi-school', text: 'Carreras', link: '/app/titulaciones'},
-                    {icon: 'mdi-account-tie', text: 'Maestros', link: '/app/titulaciones'},
+                    {icon: 'mdi-account-tie', text: 'Maestros', link: '/app/catalogos/maestros'},
                     {icon: 'mdi-domain', text: 'Departamentos', link: '/app/catalogos/departamentos'},
                 ]
             },
