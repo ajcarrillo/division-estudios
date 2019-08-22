@@ -21,7 +21,35 @@ export default {
 
         Vue.delete(state.departamentos, index)
     },
+
     SET_USERS(state, payload) {
         state.usuarios = payload;
     },
+
+    SET_MAESTROS(state, payload) {
+        state.maestros = payload
+    },
+    ADD_MAESTROS(state, payload) {
+        state.maestros.push(payload);
+    },
+    UPDATE_MAESTROS(state, payload) {
+        let {id, item} = payload;
+
+        let index = state.maestros.findIndex(function (el) {
+            return el.id === id
+        })
+
+        Vue.set(state.maestros, index, item)
+    },
+    DELETE_MAESTROS(state, payload) {
+        let index = state.maestros.findIndex(function (el) {
+            return el.id === payload
+        })
+
+        Vue.delete(state.maestros, index)
+    },
+
+    SET_PAGINATION(state, payload) {
+        state.pagination = payload
+    }
 }

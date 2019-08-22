@@ -2,5 +2,7 @@ export default {
     departamentos: [],
     carreras: [],
     usuarios: [],
-    alumnos: []
+    alumnos: [],
+    maestros: [],
+    pagination: {}
 }
