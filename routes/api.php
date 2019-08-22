@@ -36,7 +36,15 @@ Route::prefix('/v1')
             ->group(function () {
                 Route::get('/alumnos', [ AlumnoController::class, 'index' ])->name('alumnos.index');
                 Route::get('/horarios', [ HorarioController::class, 'index' ])->name('horarios.index');
-                Route::get('/maestros', [ MaestroController::class, 'index' ])->name('maestros.index');
+
+                Route::prefix('/maestros')
+                    ->name('maestros.')
+                    ->group(function () {
+                        Route::post('/', [ MaestroController::class, 'store' ])->name('store');
+                        Route::get('/', [ MaestroController::class, 'index' ])->name('index');
+                        Route::patch('/{maestro}', [ MaestroController::class, 'update' ])->name('update');
+                        Route::delete('/{maestro}', [ MaestroController::class, 'delete' ])->name('delete');
+                    });
 
                 Route::prefix('/departamentos')
                     ->name('departamentos.')
