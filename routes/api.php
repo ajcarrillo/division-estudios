@@ -2,6 +2,7 @@
 
 use DivisionEstudios\Http\Controllers\Api\v1\ActaExamenController;
 use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\AlumnoController;
+use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\CarreraController;
 use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\DepartamentoController;
 use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\HorarioController;
 use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\MaestroController;
@@ -36,6 +37,15 @@ Route::prefix('/v1')
             ->group(function () {
                 Route::get('/alumnos', [ AlumnoController::class, 'index' ])->name('alumnos.index');
                 Route::get('/horarios', [ HorarioController::class, 'index' ])->name('horarios.index');
+
+                Route::prefix('/carreras')
+                    ->name('carreras.')
+                    ->group(function () {
+                        Route::post('/', [ CarreraController::class, 'store' ])->name('store');
+                        Route::get('/', [ CarreraController::class, 'index' ])->name('index');
+                        Route::patch('/{carrera}', [ CarreraController::class, 'update' ])->name('update');
+                        Route::delete('/{carrera}', [ CarreraController::class, 'delete' ])->name('delete');
+                    });
 
                 Route::prefix('/departamentos')
                     ->name('departamentos.')

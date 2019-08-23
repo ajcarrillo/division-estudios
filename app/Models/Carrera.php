@@ -8,7 +8,10 @@ class Carrera extends Model
 {
     protected $table    = 'carreras';
     protected $fillable = [
-        'descripcion', 'grado', 'jefe_departamento_id', 'id',
+        'clave',
+        'descripcion',
+        'grado',
+        'jefe_departamento_id',
     ];
 
     public function alumnos()
