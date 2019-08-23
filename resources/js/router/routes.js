@@ -1,15 +1,16 @@
 import App from '../views/App'
-import NotFound from "../components/NotFoundComponent"
+import NotFound from '../components/NotFoundComponent'
 import TitulacionesHome from '../views/titulaciones/Home'
-import TitulacionesIndex from "../views/titulaciones/Index";
+import TitulacionesIndex from '../views/titulaciones/Index';
 import ConvalidacionesHome from '../views/convalidaciones/Home'
-import CreateSinodales from "../views/titulaciones/CreateSinodales";
-import EditSinodales from "../views/titulaciones/EditSinodales";
-import CreateNombramiento from "../views/titulaciones/CreateNombramiento";
-import EditNombramiento from "../views/titulaciones/EditNombramiento";
-import CatalogosHome from "../views/catalogos/Home";
-import DepartamentosIndex from "../views/catalogos/departamentos/Index";
-import MaestrosIndex from "../views/catalogos/maestros/Index";
+import CreateSinodales from '../views/titulaciones/CreateSinodales';
+import EditSinodales from '../views/titulaciones/EditSinodales';
+import CreateNombramiento from '../views/titulaciones/CreateNombramiento';
+import EditNombramiento from '../views/titulaciones/EditNombramiento';
+import CatalogosHome from '../views/catalogos/Home';
+import DepartamentosIndex from '../views/catalogos/departamentos/Index';
+import MaestrosIndex from '../views/catalogos/maestros/Index';
+import CarrerasIndex from '../views/catalogos/carreras/Index';
 
 export default {
     mode: 'history',
@@ -69,7 +70,11 @@ export default {
                             path: 'maestros',
                             component: MaestrosIndex,
                             name: 'catalogos-maestros'
-
+                        },
+                        {
+                            path: 'carreras',
+                            component: CarrerasIndex,
+                            name: 'catalogos-carreras'
                         },
                     ]
                 },

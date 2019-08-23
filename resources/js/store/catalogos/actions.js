@@ -138,4 +138,59 @@ export default {
                 })
         });
     },
+
+    //Carreras
+    fetchCarreras({commit}, payload) {
+        return new Promise((resolve, reject) => {
+            axios.get(route('api.v1.catalogos.carreras.index'))
+                .then(res => {
+                    commit('SET_CARRERAS', res.data.items);
+                    resolve(res)
+                })
+                .catch(err => {
+                    console.log(err)
+                    reject(err)
+                })
+        });
+    },
+    storeCarreras({commit}, payload) {
+        return new Promise((resolve, reject) => {
+            axios.post(route('api.v1.catalogos.carreras.store'), payload)
+                .then(res => {
+                    commit('ADD_CARRERA', res.data.item);
+                    resolve(res)
+                })
+                .catch(err => {
+                    console.log(err)
+                    reject(err)
+                })
+        });
+    },
+    updateCarrera({commit}, payload) {
+        return new Promise((resolve, reject) => {
+            let {id, item} = payload;
+            axios.patch(route('api.v1.catalogos.carreras.update', id), item)
+                .then(res => {
+                    commit('UPDATE_CARRERAS', {id, item: res.data.item});
+                    resolve(res)
+                })
+                .catch(err => {
+                    console.log(err)
+                    reject(err)
+                })
+        });
+    },
+    deleteCarrera({commit}, payload) {
+        return new Promise((resolve, reject) => {
+            axios.delete(route('api.v1.catalogos.carreras.delete', payload))
+                .then(res => {
+                    commit('DELETE_CARRERA', payload);
+                    resolve(res)
+                })
+                .catch(err => {
+                    console.log(err)
+                    reject(err)
+                })
+        });
+    }
 }

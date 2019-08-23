@@ -6,7 +6,7 @@ window.Vue = require('vue');
 import veeValidateEs from './utilities/vee-validate-es';
 import router from './router'
 import store from './store'
-import vuetify from "./plugins/vuetify";
+import vuetify from './plugins/vuetify';
 import VeeValidate from 'vee-validate'
 import LaravelPermissions from 'laravel-permissions';
 import {mapState} from 'vuex';
@@ -25,7 +25,6 @@ const app = new Vue({
     router,
     store,
     data: () => ({
-        dialog: false,
         drawer: null,
         items: [
             {
@@ -45,7 +44,7 @@ const app = new Vue({
                 model: false,
                 children: [
                     {icon: 'mdi-account-group', text: 'Alumnos', link: '/app/titulaciones'},
-                    {icon: 'mdi-school', text: 'Carreras', link: '/app/titulaciones'},
+                    {icon: 'mdi-school', text: 'Carreras', link: '/app/catalogos/carreras'},
                     {icon: 'mdi-account-tie', text: 'Maestros', link: '/app/catalogos/maestros'},
                     {icon: 'mdi-domain', text: 'Departamentos', link: '/app/catalogos/departamentos'},
                 ]
@@ -97,7 +96,7 @@ const app = new Vue({
     },
     methods: {
         closeSnackBar() {
-            this.$store.dispatch('auth/toogleSnackbar')
+            this.$store.dispatch('auth/toogleSnackbar', false)
         },
         logout() {
             document.getElementById('logout-form').submit();

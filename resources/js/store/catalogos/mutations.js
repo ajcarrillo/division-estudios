@@ -51,5 +51,28 @@ export default {
 
     SET_PAGINATION(state, payload) {
         state.pagination = payload
-    }
+    },
+
+    SET_CARRERAS(state, payload) {
+        state.carreras = payload
+    },
+    ADD_CARRERA(state, payload) {
+        state.carreras.push(payload)
+    },
+    UPDATE_CARRERAS(state, payload) {
+        let {id, item} = payload
+
+        let index = state.carreras.findIndex(function (el) {
+            return el.id === id
+        })
+
+        Vue.set(state.carreras, index, item)
+    },
+    DELETE_CARRERA(state, payload) {
+        let index = state.carreras.findIndex(function (el) {
+            return el.id === payload
+        })
+
+        Vue.delete(state.carreras, index)
+    },
 }
