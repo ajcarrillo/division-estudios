@@ -139,6 +139,7 @@
             <v-snackbar
                 v-model="snackbar"
                 :timeout="0"
+                top
             >
                 {{ snackbarText }}
                 <v-btn

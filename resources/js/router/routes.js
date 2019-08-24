@@ -11,6 +11,10 @@ import CatalogosHome from '../views/catalogos/Home';
 import DepartamentosIndex from '../views/catalogos/departamentos/Index';
 import MaestrosIndex from '../views/catalogos/maestros/Index';
 import CarrerasIndex from '../views/catalogos/carreras/Index';
+import UsersHome from '../views/catalogos/usuarios/Home'
+import UsersIndex from '../views/catalogos/usuarios/Index'
+import CreateUser from '../views/catalogos/usuarios/CreateUser'
+import EditUser from '../views/catalogos/usuarios/EditUser'
 
 export default {
     mode: 'history',
@@ -75,6 +79,28 @@ export default {
                             path: 'carreras',
                             component: CarrerasIndex,
                             name: 'catalogos-carreras'
+                        },
+                        {
+                            path: 'usuarios',
+                            component: UsersHome,
+                            children: [
+                                {
+                                    path: '',
+                                    component: UsersIndex,
+                                    name: 'catalogos-usuarios'
+                                },
+                                {
+                                    path: 'nuevo',
+                                    component: CreateUser,
+                                    name: 'catalogos-usuarios-nuevo'
+                                },
+                                {
+                                    path: ':id',
+                                    component: EditUser,
+                                    name: 'catalogos-usuarios-editar',
+                                    props: true
+                                },
+                            ]
                         },
                     ]
                 },
