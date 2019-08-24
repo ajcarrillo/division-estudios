@@ -50,7 +50,7 @@ const app = new Vue({
                 ]
             },
             {icon: 'mdi-poll', text: 'Estadística', link: '/app/titulaciones'},
-            {icon: 'mdi-account', text: 'Usuarios', link: '/app/titulaciones'},
+            {icon: 'mdi-account', text: 'Usuarios', link: '/app/catalogos/usuarios'},
             {icon: 'mdi-code-equal', text: 'Convalidaciones', link: '/app/titulaciones'},
             /*{icon: 'mdi-content-copy', text: 'Duplicates'},
             {

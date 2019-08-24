@@ -25,6 +25,16 @@ export default {
     SET_USERS(state, payload) {
         state.usuarios = payload;
     },
+    ADD_USERS(state, payload) {
+        state.usuarios.push(payload)
+    },
+    UPDATE_USERS(state, payload) {
+        let index = state.usuarios.findIndex(function (el) {
+            return el.id === payload.id
+        })
+
+        Vue.set(state.usuarios, index, payload)
+    },
 
     SET_MAESTROS(state, payload) {
         state.maestros = payload

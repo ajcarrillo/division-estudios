@@ -78,6 +78,32 @@ export default {
                 })
         })
     },
+    storeUsuarios({commit}, payload) {
+        return new Promise((resolve, reject) => {
+            axios.post(route('api.v1.catalogos.usuarios.store'), payload)
+                .then(res => {
+                    commit('ADD_USERS', res.data.item);
+                    resolve(res)
+                })
+                .catch(err => {
+                    console.log(err)
+                    reject(err)
+                })
+        });
+    },
+    updateUsuarios({commit}, payload) {
+        return new Promise((resolve, reject) => {
+            axios.patch(route('api.v1.catalogos.usuarios.update', payload.id), payload)
+                .then(res => {
+                    commit('UPDATE_USERS', res.data.item);
+                    resolve(res)
+                })
+                .catch(err => {
+                    console.log(err)
+                    reject(err)
+                })
+        });
+    },
 
     //Maestros
     fetchMaestros({commit}, payload) {
