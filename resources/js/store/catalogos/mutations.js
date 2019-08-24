@@ -35,6 +35,20 @@ export default {
 
         Vue.set(state.usuarios, index, payload)
     },
+    REMOVE_USER_ROLE(state, payload) {
+        let {user, role} = payload
+
+        let index = state.usuarios.findIndex(function (el) {
+            return el.id === user
+        })
+
+        let roleIndex = state.usuarios[index].roles.findIndex(function (el) {
+            return el.name === role;
+        })
+
+        Vue.delete(state.usuarios[index].roles, roleIndex);
+
+    },
 
     SET_MAESTROS(state, payload) {
         state.maestros = payload

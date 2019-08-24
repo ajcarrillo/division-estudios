@@ -3,9 +3,7 @@
         <td>{{ item.name }}</td>
         <td>{{ item.email }}</td>
         <td>
-            <template v-for="role in item.roles">
-                <v-chip class="mr-4">{{ role.name }}</v-chip>
-            </template>
+            <user-roles-col :roles="item.roles"></user-roles-col>
         </td>
         <td>
             <v-btn @click="$router.push({name: 'catalogos-usuarios-editar', params:{id: item.id}})"
@@ -21,9 +19,13 @@
 </template>
 
 <script>
+    import UserRolesCol from './UserRolesCol'
+
     export default {
         name: 'UserListItem',
-        components: {},
+        components: {
+            UserRolesCol
+        },
         props: {
             item: {
                 type: Object,

@@ -104,6 +104,26 @@ export default {
                 })
         });
     },
+    removeUserRole({commit}, payload) {
+        return new Promise((resolve, reject) => {
+
+            let {user, role} = payload
+
+            axios.delete(route('api.v1.catalogos.usuarios.remove.role', user), {
+                data: {
+                    role: role
+                }
+            })
+                .then(res => {
+                    commit('REMOVE_USER_ROLE', payload);
+                    resolve(res)
+                })
+                .catch(err => {
+                    console.log(err)
+                    reject(err)
+                })
+        });
+    },
 
     //Maestros
     fetchMaestros({commit}, payload) {

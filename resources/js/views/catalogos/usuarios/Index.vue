@@ -32,6 +32,7 @@
 <script>
     import {mapActions, mapState} from 'vuex'
     import UserList from '../../../components/catalogos/usuarios/UserList'
+    import EventBus from '../../../event-bus'
 
     export default {
         name: 'UsersIndex',
@@ -50,6 +51,12 @@
                 .then(res => {
                     this.loading = false
                 })
+        },
+        mounted() {
+            let that = this
+            EventBus.$on('LOADING_USERS_INDEX', function (flag) {
+                that.loading = flag
+            })
         },
         methods: {
             nuevo() {
