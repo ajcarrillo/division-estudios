@@ -7,6 +7,7 @@ use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\DepartamentoController;
 use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\HorarioController;
 use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\MaestroController;
 use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\RemoveUserRoleController;
+use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\ResetPasswordController;
 use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\UsuariosController;
 use DivisionEstudios\Http\Controllers\Api\v1\DocumentoNombramientoController;
 use DivisionEstudios\Http\Controllers\Api\v1\JuramentoController;
@@ -63,6 +64,7 @@ Route::prefix('/v1')
                         Route::post('/', [ UsuariosController::class, 'store' ])->name('store');
                         Route::get('/', [ UsuariosController::class, 'index' ])->name('index');
                         Route::patch('/{user}', [ UsuariosController::class, 'update' ])->name('update');
+                        Route::patch('/{user}/reset-password', [ ResetPasswordController::class, 'update' ])->name('reset.password');
                         Route::delete('/{user}/role/', [ RemoveUserRoleController::class, 'delete' ])->name('remove.role');
                     });
 
