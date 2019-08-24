@@ -43,15 +43,15 @@ const app = new Vue({
                 text: 'Catálogos',
                 model: false,
                 children: [
-                    {icon: 'mdi-account-group', text: 'Alumnos', link: '/app/titulaciones'},
+                    /*{icon: 'mdi-account-group', text: 'Alumnos', link: '/app/titulaciones'},*/
                     {icon: 'mdi-school', text: 'Carreras', link: '/app/catalogos/carreras'},
                     {icon: 'mdi-account-tie', text: 'Maestros', link: '/app/catalogos/maestros'},
                     {icon: 'mdi-domain', text: 'Departamentos', link: '/app/catalogos/departamentos'},
                 ]
             },
-            {icon: 'mdi-poll', text: 'Estadística', link: '/app/titulaciones'},
+            /*{icon: 'mdi-poll', text: 'Estadística', link: '/app/titulaciones'},*/
             {icon: 'mdi-account', text: 'Usuarios', link: '/app/catalogos/usuarios'},
-            {icon: 'mdi-code-equal', text: 'Convalidaciones', link: '/app/titulaciones'},
+            /*{icon: 'mdi-code-equal', text: 'Convalidaciones', link: '/app/titulaciones'},*/
             /*{icon: 'mdi-content-copy', text: 'Duplicates'},
             {
                 icon: 'mdi-chevron-up',
