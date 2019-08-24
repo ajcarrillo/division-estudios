@@ -7,7 +7,16 @@
                 <v-chip class="mr-4">{{ role.name }}</v-chip>
             </template>
         </td>
-        <td></td>
+        <td>
+            <v-btn @click="$router.push({name: 'catalogos-usuarios-editar', params:{id: item.id}})"
+                   color="primary"
+                   elevation="0"
+                   fab
+                   x-small
+            >
+                <v-icon>mdi-pencil</v-icon>
+            </v-btn>
+        </td>
     </tr>
 </template>
 

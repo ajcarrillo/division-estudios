@@ -60,8 +60,23 @@ class UsuariosController extends Controller
     {
         $data = $request->except([ 'password' ]);
 
-        $user->update($data);
+        try {
+            $user = DB::transaction(function () use ($request, $data, $user) {
+                $user->update($data);
 
-        return ok([ 'item' => $user ]);
+                $user->syncRoles($request->input('roles'));
+
+                $user->load('roles');
+
+                return $user;
+            });
+
+            return ok([ 'item' => $user ]);
+        } catch (\Exception $e) {
+            return unprocessable_entity([
+                'trace'   => $e->getTraceAsString(),
+                'message' => $e->getMessage(),
+            ], $e->getMessage());
+        }
     }
 }

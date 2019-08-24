@@ -26,6 +26,7 @@
             type="password"
             v-model="draft.password"
             v-validate="'required'"
+            v-if="!edit"
         ></v-text-field>
 
         <v-list flat
@@ -99,6 +100,9 @@
         created() {
             if (!this.populateWith.empty) {
                 this.draft = clone(this.populateWith)
+                this.draft.roles = this.populateWith.roles.map(function (obj) {
+                    return obj.name
+                })
             }
         },
         mounted() {
