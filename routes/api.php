@@ -59,7 +59,9 @@ Route::prefix('/v1')
                 Route::prefix('/usuarios')
                     ->name('usuarios.')
                     ->group(function () {
+                        Route::post('/', [ UsuariosController::class, 'store' ])->name('store');
                         Route::get('/', [ UsuariosController::class, 'index' ])->name('index');
+                        Route::patch('/{user}', [ UsuariosController::class, 'update' ])->name('update');
                     });
 
                 Route::prefix('/maestros')
