@@ -29,6 +29,7 @@
                                     <th class="text-left">Alumno</th>
                                     <th class="text-left">Sexo</th>
                                     <th class="text-left">Carrera</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>

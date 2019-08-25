@@ -45,6 +45,7 @@ Route::prefix('/v1')
                         Route::post('/', [ AlumnosController::class, 'store' ])->name('store');
                         Route::get('/', [ AlumnosController::class, 'index' ])->name('all');
                         Route::get('/por-numero-control', [ AlumnoController::class, 'index' ])->name('index');
+                        Route::patch('/{alumno}', [ AlumnosController::class, 'update' ])->name('update');
                     });
 
                 Route::get('/horarios', [ HorarioController::class, 'index' ])->name('horarios.index');

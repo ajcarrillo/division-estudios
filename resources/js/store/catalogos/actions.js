@@ -269,5 +269,18 @@ export default {
                     reject(err)
                 })
         });
+    },
+    updateAlumnos({commit}, payload) {
+        return new Promise((resolve, reject) => {
+            axios.patch(route('api.v1.catalogos.alumnos.update', payload.id), payload)
+                .then(res => {
+                    commit('UPDATE_ALUMNOS', res.data.item);
+                    resolve(res)
+                })
+                .catch(err => {
+                    console.log(err)
+                    reject(err)
+                })
+        });
     }
 }

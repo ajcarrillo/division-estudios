@@ -39,8 +39,12 @@ class AlumnosController extends Controller
         return ok([ 'item' => $item ]);
     }
 
-    public function update()
+    public function update(Request $request, Alumno $alumno)
     {
-        //
+        $alumno->update($request->input());
+
+        $alumno->load('carrera');
+
+        return ok([ 'item' => $alumno ]);
     }
 }
