@@ -70,6 +70,7 @@
                     @auth
                         <a href="{{ url('/app') }}">Inicio</a>
                     @else
+                        <a href="{{ route('login') }}">Login</a>
                     @endauth
                 </div>
             @endif
