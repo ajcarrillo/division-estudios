@@ -43,12 +43,12 @@ const app = new Vue({
                 'icon-alt': 'mdi-chevron-down',
                 text: 'Catálogos',
                 model: false,
-                roles: 'division-estudios|titulacion',
+                roles: 'division-estudios',
                 children: [
-                    {icon: 'mdi-account-group', text: 'Alumnos', link: '/app/catalogos/alumnos', roles: 'division-estudios|titulacion',},
-                    {icon: 'mdi-school', text: 'Carreras', link: '/app/catalogos/carreras', roles: 'division-estudios|titulacion',},
-                    {icon: 'mdi-account-tie', text: 'Maestros', link: '/app/catalogos/maestros', roles: 'division-estudios|titulacion',},
-                    {icon: 'mdi-domain', text: 'Departamentos', link: '/app/catalogos/departamentos', roles: 'division-estudios|titulacion',},
+                    {icon: 'mdi-account-group', text: 'Alumnos', link: '/app/catalogos/alumnos', roles: 'division-estudios',},
+                    {icon: 'mdi-school', text: 'Carreras', link: '/app/catalogos/carreras', roles: 'division-estudios',},
+                    {icon: 'mdi-account-tie', text: 'Maestros', link: '/app/catalogos/maestros', roles: 'division-estudios',},
+                    {icon: 'mdi-domain', text: 'Departamentos', link: '/app/catalogos/departamentos', roles: 'division-estudios',},
                 ]
             },
             /*{icon: 'mdi-poll', text: 'Estadística', link: '/app/titulaciones'},*/
