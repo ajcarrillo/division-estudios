@@ -32,9 +32,10 @@ const app = new Vue({
                 'icon-alt': 'mdi-chevron-down',
                 text: 'Titulaciones',
                 model: false,
+                roles: 'division-estudios|titulacion|jefe-departamento',
                 children: [
-                    {icon: 'mdi-format-list-bulleted', text: 'Ver listado', link: '/app/titulaciones'},
-                    {icon: 'mdi-plus', text: 'Nueva', link: '/app/titulaciones/nueva'},
+                    {icon: 'mdi-format-list-bulleted', text: 'Ver listado', link: '/app/titulaciones', roles: 'division-estudios|titulacion|jefe-departamento',},
+                    {icon: 'mdi-plus', text: 'Nueva', link: '/app/titulaciones/nueva', roles: 'division-estudios|titulacion',},
                 ]
             },
             {
@@ -42,15 +43,16 @@ const app = new Vue({
                 'icon-alt': 'mdi-chevron-down',
                 text: 'Catálogos',
                 model: false,
+                roles: 'division-estudios|titulacion',
                 children: [
-                    {icon: 'mdi-account-group', text: 'Alumnos', link: '/app/catalogos/alumnos'},
-                    {icon: 'mdi-school', text: 'Carreras', link: '/app/catalogos/carreras'},
-                    {icon: 'mdi-account-tie', text: 'Maestros', link: '/app/catalogos/maestros'},
-                    {icon: 'mdi-domain', text: 'Departamentos', link: '/app/catalogos/departamentos'},
+                    {icon: 'mdi-account-group', text: 'Alumnos', link: '/app/catalogos/alumnos', roles: 'division-estudios|titulacion',},
+                    {icon: 'mdi-school', text: 'Carreras', link: '/app/catalogos/carreras', roles: 'division-estudios|titulacion',},
+                    {icon: 'mdi-account-tie', text: 'Maestros', link: '/app/catalogos/maestros', roles: 'division-estudios|titulacion',},
+                    {icon: 'mdi-domain', text: 'Departamentos', link: '/app/catalogos/departamentos', roles: 'division-estudios|titulacion',},
                 ]
             },
             /*{icon: 'mdi-poll', text: 'Estadística', link: '/app/titulaciones'},*/
-            {icon: 'mdi-account', text: 'Usuarios', link: '/app/catalogos/usuarios'},
+            {icon: 'mdi-account', text: 'Usuarios', link: '/app/catalogos/usuarios', roles: 'division-estudios',},
             /*{icon: 'mdi-code-equal', text: 'Convalidaciones', link: '/app/titulaciones'},*/
             /*{icon: 'mdi-content-copy', text: 'Duplicates'},
             {
@@ -102,7 +104,7 @@ const app = new Vue({
             document.getElementById('logout-form').submit();
         },
     },
-    mounted() {
+    created() {
         this.$store.dispatch('auth/fetchUser', window.user);
         this.$store.dispatch('auth/fetchRoles', window.roles);
         this.$store.dispatch('auth/fetchApiToken', window.api_token);
