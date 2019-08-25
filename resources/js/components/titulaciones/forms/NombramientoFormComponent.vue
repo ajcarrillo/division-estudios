@@ -35,6 +35,15 @@
                             <v-list-item-subtitle>GENERACION: {{ generacion }}</v-list-item-subtitle>
                         </v-list-item-content>
                     </v-list-item>
+                    <v-list-item v-else two-line>
+                        <v-list-item-content class="py-0">
+                            <v-list-item-title class="subtitle-1 font-weight-medium">
+                                Alumno no encontrado
+                            </v-list-item-title>
+                            <v-list-item-subtitle>Verifica que el alumno no tenga un trámite iniciado</v-list-item-subtitle>
+                            <v-list-item-subtitle>Verifica que el número de control sea correcto.</v-list-item-subtitle>
+                        </v-list-item-content>
+                    </v-list-item>
                 </v-alert>
             </v-col>
         </v-row>
@@ -151,7 +160,7 @@
     const _ = require('lodash');
 
     export default {
-        name: "NombramientoForm",
+        name: 'NombramientoForm',
         components: {},
         props: {
             nombramiento: {
@@ -236,12 +245,16 @@
             buscarAlumno() {
                 this.$emit('loading');
                 let params = {numero_control: this.numero_control, sinNombramiento: ''};
-
+                this.alert = false;
                 axios.get(route('api.v1.catalogos.alumnos.index'), {params})
                     .then(res => {
-                        this.draft.alumno = res.data.alumno;
+                        if (res.data.alumno === null) {
+                            this.draft.alumno.empty = true
+                        } else {
+                            this.draft.alumno = res.data.alumno;
+                        }
                         this.$emit('loading');
-                        this.alert = !this.alert;
+                        this.alert = true;
                     })
             },
             clear() {
@@ -312,10 +325,10 @@
             generacion() {
                 if (this.numero_control) {
                     if (isNaN(this.numero_control.substr(0, 1))) {
-                        let d = new Date("01/01/" + this.numero_control.substr(1, 2));
+                        let d = new Date('01/01/' + this.numero_control.substr(1, 2));
                         return d.getFullYear();
                     } else {
-                        let d = new Date("01/01/" + this.numero_control.substr(0, 2));
+                        let d = new Date('01/01/' + this.numero_control.substr(0, 2));
                         return d.getFullYear();
                     }
                 }
