@@ -15,6 +15,8 @@ import UsersHome from '../views/catalogos/usuarios/Home'
 import UsersIndex from '../views/catalogos/usuarios/Index'
 import CreateUser from '../views/catalogos/usuarios/CreateUser'
 import EditUser from '../views/catalogos/usuarios/EditUser'
+import AlumnosHome from '../views/catalogos/alumnos/Home'
+import AlumnosIndex from '../views/catalogos/alumnos/Index'
 
 export default {
     mode: 'history',
@@ -64,6 +66,17 @@ export default {
                     path: 'catalogos',
                     component: CatalogosHome,
                     children: [
+                        {
+                            path: 'alumnos',
+                            component: AlumnosHome,
+                            children: [
+                                {
+                                    path: '',
+                                    component: AlumnosIndex,
+                                    name: 'catalogos-alumnos'
+                                }
+                            ]
+                        },
                         {
                             path: 'departamentos',
                             component: DepartamentosIndex,

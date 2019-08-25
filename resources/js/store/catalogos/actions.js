@@ -238,5 +238,23 @@ export default {
                     reject(err)
                 })
         });
+    },
+
+    //Alumnos
+    fetchAlumnos({commit}, payload) {
+        return new Promise((resolve, reject) => {
+            axios.get(route('api.v1.catalogos.alumnos.all'), {
+                params: payload
+            })
+                .then(res => {
+                    commit('SET_ALUMNOS', res.data.items.data);
+                    commit('SET_PAGINATION', res.data.items)
+                    resolve(res)
+                })
+                .catch(err => {
+                    console.log(err)
+                    reject(err)
+                })
+        });
     }
 }

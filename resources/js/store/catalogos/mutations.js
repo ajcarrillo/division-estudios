@@ -99,4 +99,8 @@ export default {
 
         Vue.delete(state.carreras, index)
     },
+
+    SET_ALUMNOS(state, payload) {
+        state.alumnos = payload
+    }
 }
