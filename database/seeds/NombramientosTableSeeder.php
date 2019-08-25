@@ -1,5 +1,12 @@
 <?php
 
+use Carbon\Carbon;
+use DivisionEstudios\Models\Alumno;
+use DivisionEstudios\Models\Horario;
+use DivisionEstudios\Models\Modulo;
+use DivisionEstudios\Models\Nombramiento;
+use DivisionEstudios\Models\NumeroOficio;
+use DivisionEstudios\Models\Opcion;
 use Illuminate\Database\Seeder;
 
 class NombramientosTableSeeder extends Seeder
@@ -11,24 +18,29 @@ class NombramientosTableSeeder extends Seeder
      */
     public function run()
     {
-        $alumnos = \DivisionEstudios\Models\Alumno::take(100)
+        $alumnos = Alumno::take(100)
             ->inRandomOrder()
             ->get();
 
-        $date = \Carbon\Carbon::now();
+        $date = Carbon::now();
+
         foreach ($alumnos as $alumno) {
-            \DivisionEstudios\Models\Nombramiento::create([
-                'numero_memo_id' => 1,
-                'numero_oficio'  => '9999',
+
+            $oficio = NumeroOficio::getNumeroOficio();
+            $oficio->update([ 'activo' => 0 ]);
+
+            Nombramiento::create([
+                'numero_memo_id' => $oficio->id,
+                'numero_oficio'  => NULL,
                 'alumno_id'      => $alumno->id,
-                'opcion_id'      => \DivisionEstudios\Models\Opcion::inRandomOrder()->first()->id,
-                'modulo_id'      => \DivisionEstudios\Models\Modulo::inRandomOrder()->first()->id,
+                'opcion_id'      => Opcion::inRandomOrder()->first()->id,
+                'modulo_id'      => Modulo::inRandomOrder()->first()->id,
                 'proyecto'       => NULL,
                 'fecha'          => $date,
-                'horario_id'     => \DivisionEstudios\Models\Horario::inRandomOrder()->first()->id,
+                'horario_id'     => Horario::inRandomOrder()->first()->id,
                 'estatus'        => 'C',
             ]);
-            $date = $date->addDay(1);
+            $date = $date->addDay(rand(1, 5));
         }
     }
 }
