@@ -16,7 +16,9 @@ class UsersTableSeeder extends Seeder
                 'name'  => 'LIC. RAQUEL IVET SAAVEDRA VARGAS',
                 'email' => 'profesionales@itchetumal.edu.mx',
             ]
-        );
+        )->each(function ($u) {
+            $u->assignRole('division-estudios');
+        });
 
         $jefesDeptos = [
             [ 'name' => 'DR. EUSTACIO DÍAZ RODRÍGUEZ', ],
