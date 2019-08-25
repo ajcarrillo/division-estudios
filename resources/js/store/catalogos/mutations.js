@@ -99,4 +99,18 @@ export default {
 
         Vue.delete(state.carreras, index)
     },
+
+    SET_ALUMNOS(state, payload) {
+        state.alumnos = payload
+    },
+    ADD_ALUMNO(state, payload) {
+        state.alumnos.push(payload)
+    },
+    UPDATE_ALUMNOS(state, payload) {
+        let index = state.alumnos.findIndex(function (el) {
+            return el.id === payload.id
+        })
+
+        Vue.set(state.alumnos, index, payload)
+    }
 }

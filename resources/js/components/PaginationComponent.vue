@@ -10,17 +10,7 @@
 
 <script>
     import {mapActions, mapState} from 'vuex';
-    /*current_page:1
-    first_page_url:"http://divisionestudios.test/api/v1/nombramientos?page=1"
-    from:1
-    last_page:1
-    last_page_url:"http://divisionestudios.test/api/v1/nombramientos?page=1"
-    next_page_url:null
-    path:"http://divisionestudios.test/api/v1/nombramientos"
-    per_page:50
-    prev_page_url:null
-    to:18
-    total:18*/
+
     export default {
         name: "PaginationComponent",
         components: {},

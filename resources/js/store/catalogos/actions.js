@@ -238,5 +238,49 @@ export default {
                     reject(err)
                 })
         });
+    },
+
+    //Alumnos
+    fetchAlumnos({commit}, payload) {
+        return new Promise((resolve, reject) => {
+            axios.get(route('api.v1.catalogos.alumnos.all'), {
+                params: payload
+            })
+                .then(res => {
+                    commit('SET_ALUMNOS', res.data.items.data);
+                    commit('SET_PAGINATION', res.data.items)
+                    resolve(res)
+                })
+                .catch(err => {
+                    console.log(err)
+                    reject(err)
+                })
+        });
+    },
+    storeAlumnos({commit}, payload) {
+        return new Promise((resolve, reject) => {
+            axios.post(route('api.v1.catalogos.alumnos.store'), payload)
+                .then(res => {
+                    commit('ADD_ALUMNO', res.data.item);
+                    resolve(res)
+                })
+                .catch(err => {
+                    console.log(err)
+                    reject(err)
+                })
+        });
+    },
+    updateAlumnos({commit}, payload) {
+        return new Promise((resolve, reject) => {
+            axios.patch(route('api.v1.catalogos.alumnos.update', payload.id), payload)
+                .then(res => {
+                    commit('UPDATE_ALUMNOS', res.data.item);
+                    resolve(res)
+                })
+                .catch(err => {
+                    console.log(err)
+                    reject(err)
+                })
+        });
     }
 }

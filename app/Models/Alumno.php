@@ -23,4 +23,9 @@ class Alumno extends Model
     {
         return $this->hasOne(Nombramiento::class, 'alumno_id');
     }
+
+    public function setNombreCompletoAttribute($value)
+    {
+        $this->attributes['nombre_completo'] = strtoupper($value);
+    }
 }

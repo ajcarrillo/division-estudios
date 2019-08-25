@@ -10,5 +10,8 @@ export default {
     },
     getHoras: (state) => {
         return state.horas;
+    },
+    lengthNombramientos: (state) => {
+        return state.titulaciones.length
     }
 }
