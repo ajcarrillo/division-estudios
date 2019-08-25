@@ -256,5 +256,18 @@ export default {
                     reject(err)
                 })
         });
+    },
+    storeAlumnos({commit}, payload) {
+        return new Promise((resolve, reject) => {
+            axios.post(route('api.v1.catalogos.alumnos.store'), payload)
+                .then(res => {
+                    commit('ADD_ALUMNO', res.data.item);
+                    resolve(res)
+                })
+                .catch(err => {
+                    console.log(err)
+                    reject(err)
+                })
+        });
     }
 }

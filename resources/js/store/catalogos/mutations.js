@@ -102,5 +102,8 @@ export default {
 
     SET_ALUMNOS(state, payload) {
         state.alumnos = payload
+    },
+    ADD_ALUMNO(state, payload) {
+        state.alumnos.push(payload)
     }
 }

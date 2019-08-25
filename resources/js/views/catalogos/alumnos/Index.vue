@@ -5,9 +5,21 @@
                 <v-card :loading="loading"
                 >
                     <v-card-title primary-title>
-                        <div>
-                            <h3 class="headline mb-0">Alumnos</h3>
-                        </div>
+                        <v-list two-line>
+                            <v-list-item>
+                                <v-list-item-content>
+                                    <v-list-item-title><h3 class="headline mb-0">Alumnos</h3></v-list-item-title>
+                                    <v-list-item-subtitle>
+                                        <span @click="$router.push({name: 'catalogos-alumnos-nuevo'})"
+                                              style="cursor: pointer"
+                                        >
+                                            <v-icon size="14">mdi-plus</v-icon>
+                                            Agregar
+                                        </span>
+                                    </v-list-item-subtitle>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-list>
                     </v-card-title>
                     <v-card-text>
                         <v-simple-table>

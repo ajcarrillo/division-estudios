@@ -27,4 +27,20 @@ class AlumnosController extends Controller
 
         return [ 'items' => $items ];
     }
+
+    public function store(Request $request)
+    {
+        $item = new Alumno($request->input());
+
+        $item->save();
+
+        $item->load('carrera');
+
+        return ok([ 'item' => $item ]);
+    }
+
+    public function update()
+    {
+        //
+    }
 }

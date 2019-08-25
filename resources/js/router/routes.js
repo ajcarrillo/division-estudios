@@ -17,6 +17,7 @@ import CreateUser from '../views/catalogos/usuarios/CreateUser'
 import EditUser from '../views/catalogos/usuarios/EditUser'
 import AlumnosHome from '../views/catalogos/alumnos/Home'
 import AlumnosIndex from '../views/catalogos/alumnos/Index'
+import CreateAlumno from '../views/catalogos/alumnos/CreateAlumno'
 
 export default {
     mode: 'history',
@@ -74,7 +75,12 @@ export default {
                                     path: '',
                                     component: AlumnosIndex,
                                     name: 'catalogos-alumnos'
-                                }
+                                },
+                                {
+                                    path: 'nuevo',
+                                    component: CreateAlumno,
+                                    name: 'catalogos-alumnos-nuevo'
+                                },
                             ]
                         },
                         {

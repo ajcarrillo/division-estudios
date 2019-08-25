@@ -42,6 +42,7 @@ Route::prefix('/v1')
                 Route::prefix('/alumnos')
                     ->name('alumnos.')
                     ->group(function () {
+                        Route::post('/', [ AlumnosController::class, 'store' ])->name('store');
                         Route::get('/', [ AlumnosController::class, 'index' ])->name('all');
                         Route::get('/por-numero-control', [ AlumnoController::class, 'index' ])->name('index');
                     });
