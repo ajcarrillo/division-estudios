@@ -7,6 +7,7 @@ use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\CarreraController;
 use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\DepartamentoController;
 use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\HorarioController;
 use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\MaestroController;
+use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\NumeroOficioController;
 use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\RemoveUserRoleController;
 use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\ResetPasswordController;
 use DivisionEstudios\Http\Controllers\Api\v1\Catalogos\UsuariosController;
@@ -68,6 +69,22 @@ Route::prefix('/v1')
                         Route::delete('/{departamento}', [ DepartamentoController::class, 'delete' ])->name('delete');
                     });
 
+                Route::prefix('/maestros')
+                    ->name('maestros.')
+                    ->group(function () {
+                        Route::post('/', [ MaestroController::class, 'store' ])->name('store');
+                        Route::get('/', [ MaestroController::class, 'index' ])->name('index');
+                        Route::patch('/{maestro}', [ MaestroController::class, 'update' ])->name('update');
+                        Route::delete('/{maestro}', [ MaestroController::class, 'delete' ])->name('delete');
+                    });
+
+                Route::prefix('/numeros-oficios')
+                    ->name('numeros.oficio.')
+                    ->group(function () {
+                        Route::post('/', [ NumeroOficioController::class, 'store' ])->name('store');
+                        Route::get('/', [ NumeroOficioController::class, 'index' ])->name('index');
+                    });
+
                 Route::prefix('/usuarios')
                     ->name('usuarios.')
                     ->group(function () {
@@ -76,15 +93,6 @@ Route::prefix('/v1')
                         Route::patch('/{user}', [ UsuariosController::class, 'update' ])->name('update');
                         Route::patch('/{user}/reset-password', [ ResetPasswordController::class, 'update' ])->name('reset.password');
                         Route::delete('/{user}/role/', [ RemoveUserRoleController::class, 'delete' ])->name('remove.role');
-                    });
-
-                Route::prefix('/maestros')
-                    ->name('maestros.')
-                    ->group(function () {
-                        Route::post('/', [ MaestroController::class, 'store' ])->name('store');
-                        Route::get('/', [ MaestroController::class, 'index' ])->name('index');
-                        Route::patch('/{maestro}', [ MaestroController::class, 'update' ])->name('update');
-                        Route::delete('/{maestro}', [ MaestroController::class, 'delete' ])->name('delete');
                     });
             });
 
