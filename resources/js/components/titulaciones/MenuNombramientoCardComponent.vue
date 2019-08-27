@@ -51,7 +51,7 @@
             <template v-if="files.length">
                 <v-list-item
                     :key="i"
-                    :to="`/nombramientos/${nombramientoId}/descargar/${file.file_name}`"
+                    :href="`/nombramientos/${nombramientoId}/descargar/${file.file_name}`"
                     v-for="(file, i) in files"
                 >
                     <v-list-item-title>
