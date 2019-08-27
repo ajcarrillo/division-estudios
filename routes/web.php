@@ -28,15 +28,21 @@ Route::prefix('/nombramientos')
         Route::prefix('/{nombramientos}/descargar')
             ->name('descargas.')
             ->group(function () {
-                Route::get('/memo-sinodales', function ($nombramiento) {
+                Route::get('/memo_sinodales', function ($nombramiento) {
                     return response()->download(storage_path("app/public/nombramientos/{$nombramiento}/memo_sinodales.docx"));
                 })->name('memo.sinodales');
+
                 Route::get('/acta', function ($nombramiento) {
                     return response()->download(storage_path("app/public/nombramientos/{$nombramiento}/acta.docx"));
                 })->name('acta');
+
                 Route::get('/juramento', function ($nombramiento) {
                     return response()->download(storage_path("app/public/nombramientos/{$nombramiento}/juramento.docx"));
                 })->name('juramento');
+
+                Route::get('/nombramiento', function ($nombramiento) {
+                    return response()->download(storage_path("app/public/nombramientos/{$nombramiento}/nombramiento.docx"));
+                })->name('nombramiento');
             });
     });
 
